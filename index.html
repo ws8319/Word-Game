@@ -10,6 +10,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -20,6 +21,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            touch-action: manipulation;
         }
         
         .container {
@@ -28,9 +30,9 @@
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 30px;
+            padding: 20px;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
             position: relative;
             overflow: hidden;
             border: 8px solid #ffcc00;
@@ -38,16 +40,16 @@
         
         h1 {
             color: #ff6600;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
             text-shadow: 3px 3px 0 #ffcc00;
             letter-spacing: 1px;
         }
         
         .subtitle {
             color: #3366cc;
-            font-size: 1.5rem;
-            margin-bottom: 25px;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
         
         .game-info {
@@ -55,13 +57,13 @@
             justify-content: space-between;
             background-color: #e6f7ff;
             border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 25px;
+            padding: 12px;
+            margin-bottom: 20px;
             border: 4px solid #33aaff;
         }
         
         .question-counter, .score {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #ff3366;
         }
@@ -69,86 +71,89 @@
         .hints-container {
             background-color: #fff9e6;
             border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
+            padding: 15px;
+            margin-bottom: 20px;
             border: 4px dashed #ffcc00;
             text-align: left;
         }
         
         .hints-container h3 {
             color: #ff9900;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
         }
         
         .hint {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #333;
-            margin-bottom: 8px;
-            padding-left: 10px;
+            margin-bottom: 6px;
+            padding-left: 8px;
         }
         
         .game-area {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            width: 100%;
         }
         
         .word-length {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #3366cc;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
         
         .word-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            min-height: 100px;
+            margin-bottom: 25px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            min-height: 90px;
             background-color: #f9f9f9;
             border-radius: 15px;
-            padding: 15px;
+            padding: 12px;
             border: 3px solid #ffcc00;
+            width: 100%;
+            max-width: 100%;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .word-container-inner {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: 8px;
+            margin: 0 auto;
         }
         
         .letter-box {
-            width: 75px;
-            height: 75px;
+            min-width: 55px;
+            height: 65px;
             background-color: #ffcc00;
-            border-radius: 15px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #333;
-            margin: 0 6px 12px;
             border: 4px solid #ff9900;
-            box-shadow: 0 5px 0 #cc9900;
+            box-shadow: 0 4px 0 #cc9900;
             text-transform: uppercase;
-            cursor: grab;
+            cursor: pointer;
             transition: all 0.2s;
             user-select: none;
+            flex-shrink: 0;
         }
         
         .letter-box.empty {
             background-color: #f0f0f0;
             border: 4px dashed #999;
             box-shadow: none;
-            cursor: pointer;
-        }
-        
-        .letter-box.empty:hover {
-            background-color: #e6e6e6;
-        }
-        
-        .letter-box.dragging {
-            transform: scale(1.1);
-            box-shadow: 0 8px 0 #cc9900;
-            z-index: 10;
         }
         
         .letter-box.correct {
@@ -171,73 +176,66 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
-            min-height: 100px;
+            gap: 10px;
+            margin-top: 15px;
+            min-height: 90px;
             background-color: #f0f8ff;
             border-radius: 15px;
             padding: 15px;
             border: 3px solid #33aaff;
+            width: 100%;
         }
         
         .letter-tile {
-            width: 65px;
-            height: 65px;
+            width: 55px;
+            height: 55px;
             background-color: #33aaff;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: white;
-            margin: 0;
             border: 4px solid #0066cc;
-            box-shadow: 0 5px 0 #0066cc;
+            box-shadow: 0 4px 0 #0066cc;
             text-transform: uppercase;
-            cursor: grab;
+            cursor: pointer;
             transition: all 0.2s;
             user-select: none;
-        }
-        
-        .letter-tile.dragging {
-            opacity: 0.7;
-            transform: scale(1.1);
+            flex-shrink: 0;
         }
         
         .letter-tile.used {
             background-color: #cccccc;
             border-color: #999999;
             color: #666666;
-            box-shadow: 0 5px 0 #999999;
-        }
-        
-        .drop-zone {
-            min-height: 30px;
-            min-width: 30px;
+            box-shadow: 0 4px 0 #999999;
         }
         
         .buttons-container {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            margin-top: 30px;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
         }
         
         .game-button {
             font-family: 'Comic Neue', cursive;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            padding: 15px 30px;
+            padding: 12px 24px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+            min-width: 150px;
         }
         
         .game-button:active {
-            transform: translateY(4px);
+            transform: translateY(2px);
             box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
         }
         
@@ -263,8 +261,8 @@
         .definition-container {
             background-color: #e6f7ff;
             border-radius: 15px;
-            padding: 20px;
-            margin-top: 30px;
+            padding: 15px;
+            margin-top: 25px;
             border: 4px solid #33aaff;
             text-align: left;
             display: none;
@@ -272,14 +270,14 @@
         
         .definition-container h3 {
             color: #3366cc;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
         }
         
         .definition {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #333;
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         .success-animation {
@@ -305,28 +303,28 @@
         }
         
         .success-icon {
-            font-size: 8rem;
+            font-size: 6rem;
             color: #33cc33;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: bounce 1s infinite;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
         
         .success-text {
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: #ff6600;
             font-weight: bold;
-            text-shadow: 3px 3px 0 #ffcc00;
+            text-shadow: 2px 2px 0 #ffcc00;
         }
         
         .confetti {
             position: absolute;
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background-color: #ff3366;
             border-radius: 50%;
             animation: fall 3s linear infinite;
@@ -339,20 +337,20 @@
         
         .game-over {
             text-align: center;
-            padding: 30px;
+            padding: 25px;
             display: none;
         }
         
         .game-over h2 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #ff3366;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .final-score {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #3366cc;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         
         #restartBtn {
@@ -365,16 +363,16 @@
         }
         
         .letters-info {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #3366cc;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
         
         .answer-feedback {
             background-color: #fff0f0;
             border-radius: 15px;
-            padding: 15px;
+            padding: 12px;
             margin-top: 20px;
             border: 4px solid #ff6666;
             text-align: center;
@@ -383,61 +381,110 @@
         
         .answer-feedback h3 {
             color: #ff3366;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
         }
         
         .correct-answer {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #3366cc;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 8px 0;
             text-transform: uppercase;
         }
         
         @media (max-width: 768px) {
-            .letter-box, .letter-tile {
-                width: 55px;
-                height: 55px;
+            h1 {
                 font-size: 1.8rem;
             }
             
-            h1 {
-                font-size: 2.2rem;
+            .subtitle {
+                font-size: 1rem;
             }
             
-            .subtitle {
-                font-size: 1.2rem;
+            .letter-box {
+                min-width: 45px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+            
+            .letter-tile {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+            
+            .game-button {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                min-width: 130px;
             }
             
             .word-container {
-                gap: 5px;
-            }
-            
-            .letters-container {
-                gap: 8px;
+                padding: 10px;
+                gap: 6px;
             }
         }
         
         @media (max-width: 480px) {
-            .letter-box, .letter-tile {
-                width: 48px;
-                height: 48px;
-                font-size: 1.6rem;
+            .container {
+                padding: 15px;
+            }
+            
+            .letter-box {
+                min-width: 40px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+            
+            .letter-tile {
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
             }
             
             .game-button {
-                font-size: 1.2rem;
-                padding: 12px 20px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
+                font-size: 1rem;
+                padding: 8px 16px;
+                min-width: 120px;
             }
             
             .word-container {
-                gap: 3px;
+                padding: 8px;
+                gap: 5px;
             }
+        }
+        
+        .word-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .word-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .word-container::-webkit-scrollbar-thumb {
+            background: #ff9900;
+            border-radius: 10px;
+        }
+        
+        .instructions {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #333;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .center-helper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
     </style>
 </head>
@@ -459,8 +506,10 @@
         
         <div class="game-area">
             <div class="word-length" id="wordLength">Word has <span id="letterCount">0</span> letters</div>
-            <div class="word-container" id="wordContainer">
-                <!-- Empty boxes will be generated here -->
+            <div class="center-helper">
+                <div class="word-container" id="wordContainer">
+                    <!-- Empty boxes will be generated here -->
+                </div>
             </div>
             
             <div class="letters-info">Available letters (8 letters):</div>
@@ -498,346 +547,324 @@
         </div>
     </div>
     
+    <div class="instructions">
+        <p><strong>How to play:</strong> Tap letters in the bottom area to add them to the answer boxes above. Tap letters in the answer boxes to return them to the bottom area. When the word is complete, tap "Check Spelling"!</p>
+    </div>
+    
     <script>
-        // Word bank organized by theme - 50 words per theme (300 total words)
+        // Word bank with 50 words per theme
         const wordBank = {
             animals: [
-                { word: "CAT", hints: ["A small pet that says 'meow'", "Likes to chase mice"], meaning: "A small furry animal that people often keep as a pet. Cats like to chase toys and sleep in warm places." },
-                { word: "DOG", hints: ["A pet that says 'woof'", "Man's best friend"], meaning: "A friendly animal that people keep as a pet. Dogs like to play fetch and go for walks with their owners." },
-                { word: "FISH", hints: ["Lives in water", "Swims with fins"], meaning: "An animal that lives in water and breathes through gills. Fish come in many colors and sizes." },
-                { word: "BIRD", hints: ["Has feathers and wings", "Can fly in the sky"], meaning: "An animal with feathers and wings. Most birds can fly, and they build nests for their eggs." },
-                { word: "FROG", hints: ["Lives near water", "Jumps and says 'ribbit'"], meaning: "A small animal that can live both in water and on land. Frogs start as tadpoles and like to eat insects." },
-                { word: "BEAR", hints: ["Big and furry", "Likes honey"], meaning: "A large furry animal that lives in forests. Some bears sleep all winter, which is called hibernation." },
-                { word: "LION", hints: ["King of the jungle", "Has a big mane"], meaning: "A big cat that lives in groups called prides. Lions are known as the 'king of the jungle'." },
-                { word: "DEER", hints: ["Has antlers", "Lives in the forest"], meaning: "A graceful animal that lives in forests. Male deer grow antlers that fall off and grow back each year." },
-                { word: "OWL", hints: ["Flies at night", "Says 'hoot hoot'"], meaning: "A bird that is most active at night. Owls have excellent hearing and can turn their heads almost all the way around." },
-                { word: "CRAB", hints: ["Has pincers", "Walks sideways"], meaning: "A sea creature with a hard shell and pincers. Crabs walk sideways along the beach and ocean floor." },
-                { word: "BAT", hints: ["Flies at night", "Not a bird, it's a mammal"], meaning: "A flying mammal that is active at night. Bats use sound to find their way and eat insects." },
-                { word: "BEE", hints: ["Makes honey", "Has stripes and can sting"], meaning: "A small flying insect that makes honey. Bees collect pollen from flowers and help plants grow." },
-                { word: "FOX", hints: ["Has a bushy tail", "Sly and clever animal"], meaning: "A wild animal with a bushy tail and pointy ears. Foxes are known for being clever and quick." },
-                { word: "GOAT", hints: ["Has horns", "Says 'baa'"], meaning: "A farm animal with horns that likes to climb. Goats eat almost anything and give us milk." },
-                { word: "SEAL", hints: ["Lives in cold water", "Swims with flippers"], meaning: "A sea animal with flippers and a smooth body. Seals swim well and can hold their breath for a long time." },
-                { word: "WOLF", hints: ["Looks like a big dog", "Lives in packs"], meaning: "A wild animal that looks like a large dog. Wolves live and hunt together in groups called packs." },
-                { word: "BEAVER", hints: ["Builds dams", "Has a flat tail"], meaning: "A furry animal that builds dams in rivers. Beavers have big front teeth and flat tails." },
-                { word: "MOOSE", hints: ["Very large deer", "Has big antlers"], meaning: "The largest member of the deer family. Moose have huge antlers and live in cold places." },
-                { word: "OTTER", hints: ["Loves to play in water", "Has a sleek body"], meaning: "A playful animal that loves to swim. Otters have sleek bodies and can hold their breath underwater." },
-                { word: "PANDA", hints: ["Black and white bear", "Eats bamboo"], meaning: "A bear with black and white fur. Pandas eat mostly bamboo and live in China." },
-                { word: "KOALA", hints: ["Lives in Australia", "Eats eucalyptus leaves"], meaning: "A furry animal from Australia that looks like a small bear. Koalas sleep a lot and eat eucalyptus leaves." },
-                { word: "TIGER", hints: ["Big cat with stripes", "Orange and black"], meaning: "A large wild cat with orange fur and black stripes. Tigers are powerful hunters." },
-                { word: "ZEBRA", hints: ["Looks like a striped horse", "Black and white"], meaning: "An African animal that looks like a horse with black and white stripes." },
-                { word: "GIRAFFE", hints: ["Has a very long neck", "Tallest animal"], meaning: "The tallest animal in the world. Giraffes have long necks to reach leaves high in trees." },
-                { word: "ELEPHANT", hints: ["Has a trunk", "Largest land animal"], meaning: "The largest land animal. Elephants have long trunks, big ears, and tusks." },
-                { word: "MONKEY", hints: ["Climbs trees", "Likes bananas"], meaning: "An animal that can climb trees well. Monkeys use their hands and feet to grab things." },
-                { word: "KANGAROO", hints: ["Hops on two legs", "Has a pouch"], meaning: "An Australian animal that hops on two strong legs. Kangaroos have pouches for their babies." },
-                { word: "WHALE", hints: ["Largest animal in ocean", "Not a fish"], meaning: "A very large animal that lives in the ocean. Whales breathe air through a blowhole." },
-                { word: "SHARK", hints: ["Ocean predator", "Has sharp teeth"], meaning: "A large fish with many sharp teeth. Sharks are excellent swimmers and hunters." },
-                { word: "DOLPHIN", hints: ["Smart sea animal", "Likes to jump"], meaning: "A very smart sea animal that likes to jump and play. Dolphins communicate with clicks and whistles." },
-                { word: "TURTLE", hints: ["Has a shell", "Moves slowly"], meaning: "An animal with a hard shell on its back. Turtles can pull their head and legs into their shell." },
-                { word: "SNAKE", hints: ["Has no legs", "Slithers on ground"], meaning: "A long reptile without legs. Snakes slither along the ground and some can be dangerous." },
-                { word: "LIZARD", hints: ["Scaly skin", "Can lose its tail"], meaning: "A reptile with scaly skin and four legs. Some lizards can lose their tail if grabbed." },
-                { word: "RABBIT", hints: ["Has long ears", "Hops fast"], meaning: "A small furry animal with long ears. Rabbits hop quickly and like to eat carrots." },
-                { word: "HEDGEHOG", hints: ["Has spines", "Rolls into a ball"], meaning: "A small animal covered in spines. Hedgehogs roll into a ball when scared." },
-                { word: "RACCOON", hints: ["Mask on face", "Washes food"], meaning: "An animal with a black mask on its face. Raccoons are clever and often wash their food." },
+                { word: "CAT", hints: ["A small pet that says 'meow'", "Likes to chase mice"], meaning: "A small furry animal that people often keep as a pet." },
+                { word: "DOG", hints: ["A pet that says 'woof'", "Man's best friend"], meaning: "A friendly animal that people keep as a pet." },
+                { word: "FISH", hints: ["Lives in water", "Swims with fins"], meaning: "An animal that lives in water and breathes through gills." },
+                { word: "BIRD", hints: ["Has feathers and wings", "Can fly in the sky"], meaning: "An animal with feathers and wings." },
+                { word: "FROG", hints: ["Lives near water", "Jumps and says 'ribbit'"], meaning: "A small animal that can live both in water and on land." },
+                { word: "BEAR", hints: ["Big and furry", "Likes honey"], meaning: "A large furry animal that lives in forests." },
+                { word: "LION", hints: ["King of the jungle", "Has a big mane"], meaning: "A big cat that lives in groups called prides." },
+                { word: "DEER", hints: ["Has antlers", "Lives in the forest"], meaning: "A graceful animal that lives in forests." },
+                { word: "OWL", hints: ["Flies at night", "Says 'hoot hoot'"], meaning: "A bird that is most active at night." },
+                { word: "CRAB", hints: ["Has pincers", "Walks sideways"], meaning: "A sea creature with a hard shell and pincers." },
+                { word: "BAT", hints: ["Flies at night", "Not a bird, it's a mammal"], meaning: "A flying mammal that is active at night." },
+                { word: "BEE", hints: ["Makes honey", "Has stripes and can sting"], meaning: "A small flying insect that makes honey." },
+                { word: "FOX", hints: ["Has a bushy tail", "Sly and clever animal"], meaning: "A wild animal with a bushy tail and pointy ears." },
+                { word: "GOAT", hints: ["Has horns", "Says 'baa'"], meaning: "A farm animal with horns that likes to climb." },
+                { word: "SEAL", hints: ["Lives in cold water", "Swims with flippers"], meaning: "A sea animal with flippers and a smooth body." },
+                { word: "WOLF", hints: ["Looks like a big dog", "Lives in packs"], meaning: "A wild animal that looks like a large dog." },
+                { word: "BEAVER", hints: ["Builds dams", "Has a flat tail"], meaning: "A furry animal that builds dams in rivers." },
+                { word: "MOOSE", hints: ["Very large deer", "Has big antlers"], meaning: "The largest member of the deer family." },
+                { word: "OTTER", hints: ["Loves to play in water", "Has a sleek body"], meaning: "A playful animal that loves to swim." },
+                { word: "PANDA", hints: ["Black and white bear", "Eats bamboo"], meaning: "A bear with black and white fur." },
+                { word: "KOALA", hints: ["Lives in Australia", "Eats eucalyptus leaves"], meaning: "A furry animal from Australia that looks like a small bear." },
+                { word: "TIGER", hints: ["Big cat with stripes", "Orange and black"], meaning: "A large wild cat with orange fur and black stripes." },
+                { word: "ZEBRA", hints: ["Looks like a striped horse", "Black and white"], meaning: "An African animal that looks like a horse with stripes." },
+                { word: "GIRAFFE", hints: ["Has a very long neck", "Tallest animal"], meaning: "The tallest animal in the world." },
+                { word: "ELEPHANT", hints: ["Has a trunk", "Largest land animal"], meaning: "The largest land animal." },
+                { word: "MONKEY", hints: ["Climbs trees", "Likes bananas"], meaning: "An animal that can climb trees well." },
+                { word: "KANGAROO", hints: ["Hops on two legs", "Has a pouch"], meaning: "An Australian animal that hops on two strong legs." },
+                { word: "WHALE", hints: ["Largest animal in ocean", "Not a fish"], meaning: "A very large animal that lives in the ocean." },
+                { word: "SHARK", hints: ["Ocean predator", "Has sharp teeth"], meaning: "A large fish with many sharp teeth." },
+                { word: "DOLPHIN", hints: ["Smart sea animal", "Likes to jump"], meaning: "A very smart sea animal that likes to jump and play." },
+                { word: "TURTLE", hints: ["Has a shell", "Moves slowly"], meaning: "An animal with a hard shell on its back." },
+                { word: "SNAKE", hints: ["Has no legs", "Slithers on ground"], meaning: "A long reptile without legs." },
+                { word: "LIZARD", hints: ["Scaly skin", "Can lose its tail"], meaning: "A reptile with scaly skin and four legs." },
+                { word: "RABBIT", hints: ["Has long ears", "Hops fast"], meaning: "A small furry animal with long ears." },
+                { word: "HEDGEHOG", hints: ["Has spines", "Rolls into a ball"], meaning: "A small animal covered in spines." },
+                { word: "RACCOON", hints: ["Mask on face", "Washes food"], meaning: "An animal with a black mask on its face." },
                 { word: "SKUNK", hints: ["Black and white", "Sprays bad smell"], meaning: "A black and white animal that sprays a bad smell when scared." },
                 { word: "PORCUPINE", hints: ["Has quills", "Spiky animal"], meaning: "An animal covered in sharp quills for protection." },
-                { word: "HIPPO", hints: ["Large water animal", "Has big mouth"], meaning: "A large animal that spends much time in water. Hippos have very big mouths." },
-                { word: "RHINO", hints: ["Has a horn", "Thick skin"], meaning: "A large animal with thick skin and one or two horns on its nose." },
-                { word: "CAMEL", hints: ["Has humps", "Lives in desert"], meaning: "An animal with humps on its back that stores water. Camels live in deserts." },
-                { word: "FLAMINGO", hints: ["Pink bird", "Stands on one leg"], meaning: "A tall pink bird that often stands on one leg in water." },
-                { word: "PENGUIN", hints: ["Black and white bird", "Cannot fly"], meaning: "A bird that cannot fly but swims very well. Penguins live in cold places." },
-                { word: "PARROT", hints: ["Colorful bird", "Can talk"], meaning: "A colorful bird that can learn to talk. Parrots are very smart." },
-                { word: "EAGLE", hints: ["Large bird of prey", "Good eyesight"], meaning: "A large bird with excellent eyesight. Eagles are powerful flyers and hunters." },
-                { word: "OWL", hints: ["Nocturnal bird", "Big eyes"], meaning: "A bird that is most active at night. Owls have large eyes and can turn their heads almost all the way around." },
-                { word: "SPIDER", hints: ["Has eight legs", "Spins webs"], meaning: "A small creature with eight legs. Spiders spin webs to catch insects." },
-                { word: "ANT", hints: ["Very small insect", "Lives in colonies"], meaning: "A tiny insect that lives in large groups. Ants work together to find food." },
-                { word: "BUTTERFLY", hints: ["Colorful wings", "Starts as caterpillar"], meaning: "An insect with beautiful colorful wings. Butterflies start life as caterpillars." },
-                { word: "LADYBUG", hints: ["Red with black spots", "Good for gardens"], meaning: "A small red beetle with black spots. Ladybugs are good for gardens because they eat pests." }
+                { word: "HIPPO", hints: ["Large water animal", "Has big mouth"], meaning: "A large animal that spends much time in water." },
+                { word: "RHINO", hints: ["Has a horn", "Thick skin"], meaning: "A large animal with thick skin and one or two horns." },
+                { word: "CAMEL", hints: ["Has humps", "Lives in desert"], meaning: "An animal with humps on its back that stores water." },
+                { word: "FLAMINGO", hints: ["Pink bird", "Stands on one leg"], meaning: "A tall pink bird that often stands on one leg." },
+                { word: "PENGUIN", hints: ["Black and white bird", "Cannot fly"], meaning: "A bird that cannot fly but swims very well." },
+                { word: "PARROT", hints: ["Colorful bird", "Can talk"], meaning: "A colorful bird that can learn to talk." },
+                { word: "EAGLE", hints: ["Large bird of prey", "Good eyesight"], meaning: "A large bird with excellent eyesight." },
+                { word: "SPIDER", hints: ["Has eight legs", "Spins webs"], meaning: "A small creature with eight legs." },
+                { word: "ANT", hints: ["Very small insect", "Lives in colonies"], meaning: "A tiny insect that lives in large groups." },
+                { word: "BUTTERFLY", hints: ["Colorful wings", "Starts as caterpillar"], meaning: "An insect with beautiful colorful wings." },
+                { word: "LADYBUG", hints: ["Red with black spots", "Good for gardens"], meaning: "A small red beetle with black spots." },
+                { word: "GRASSHOPPER", hints: ["Jumps high", "Makes chirping sound"], meaning: "An insect that can jump very far." }
             ],
             space: [
-                { word: "MOON", hints: ["Orbits Earth", "Shines at night"], meaning: "The natural satellite that orbits Earth. The moon reflects sunlight, which is why we can see it at night." },
-                { word: "STAR", hints: ["Twinkles at night", "Our sun is one"], meaning: "A giant ball of gas that shines in space. Our sun is a star that gives us light and heat." },
-                { word: "PLANET", hints: ["Orbits a star", "Earth is one"], meaning: "A large object that orbits a star. Our solar system has eight planets, including Earth." },
-                { word: "SUN", hints: ["Center of our solar system", "Gives us light"], meaning: "The star at the center of our solar system. The sun provides light and heat to all the planets." },
-                { word: "COMET", hints: ["Has a tail", "Made of ice and dust"], meaning: "A space object made of ice and dust that orbits the sun. When it gets close to the sun, it grows a glowing tail." },
-                { word: "ORBIT", hints: ["Path around a planet or star", "Earth does this around the sun"], meaning: "The curved path that an object takes around a planet, star, or moon. Earth orbits the sun once every year." },
-                { word: "ROCKET", hints: ["Flies into space", "Has engines"], meaning: "A vehicle that can travel into space. Rockets use powerful engines to push them up through the atmosphere." },
-                { word: "ALIEN", hints: ["Not from Earth", "Space creature"], meaning: "A being that might live on another planet. We don't know if aliens exist, but scientists look for signs of them." },
-                { word: "UFO", hints: ["Flying object", "Not from Earth"], meaning: "Short for 'Unidentified Flying Object'. This is something in the sky that people can't identify." },
-                { word: "MARS", hints: ["The red planet", "Fourth from the sun"], meaning: "The fourth planet from the sun, sometimes called the 'red planet'. Scientists have sent robots called rovers to explore Mars." },
-                { word: "EARTH", hints: ["Our home planet", "Has land and water"], meaning: "The planet we live on. Earth has land, oceans, and air that supports life." },
-                { word: "VENUS", hints: ["Brightest planet", "Very hot surface"], meaning: "The second planet from the sun and the brightest in our sky. Venus has a thick atmosphere and is very hot." },
-                { word: "METEOR", hints: ["Shooting star", "Burns up in atmosphere"], meaning: "A space rock that burns up in Earth's atmosphere, creating a streak of light called a shooting star." },
-                { word: "GALAXY", hints: ["Group of stars", "Milky Way is one"], meaning: "A huge collection of stars, gas, and dust. Our solar system is in the Milky Way galaxy." },
-                { word: "SATURN", hints: ["Has rings", "Sixth planet from sun"], meaning: "The sixth planet from the sun, famous for its beautiful rings made of ice and rock." },
-                { word: "JUPITER", hints: ["Largest planet", "Has a red spot"], meaning: "The largest planet in our solar system. Jupiter has a giant storm called the Great Red Spot." },
-                { word: "MERCURY", hints: ["Closest to sun", "Smallest planet"], meaning: "The smallest planet and the one closest to the sun. Mercury has a very hot side and a very cold side." },
-                { word: "NEPTUNE", hints: ["Blue planet", "Very windy"], meaning: "A blue planet that is the windiest in our solar system. Neptune is the eighth planet from the sun." },
-                { word: "URANUS", hints: ["Spins on its side", "Ice giant"], meaning: "A planet that spins on its side. Uranus is an ice giant with rings." },
-                { word: "PLUTO", hints: ["Dwarf planet", "Very far from sun"], meaning: "A dwarf planet at the edge of our solar system. Pluto is very small and cold." },
-                { word: "ASTEROID", hints: ["Space rock", "Orbits the sun"], meaning: "A rocky object that orbits the sun. Most asteroids are found in a belt between Mars and Jupiter." },
-                { word: "ASTRONAUT", hints: ["Space traveler", "Wears special suit"], meaning: "A person who travels to space. Astronauts wear special suits to breathe in space." },
-                { word: "TELESCOPE", hints: ["Makes stars look closer", "Used by astronomers"], meaning: "A tool that makes distant objects in space look closer. Astronomers use telescopes to study stars and planets." },
-                { word: "SPACESHIP", hints: ["Vehicle for space", "Carries astronauts"], meaning: "A vehicle designed to travel in space. Spaceships can carry astronauts and supplies." },
-                { word: "SATELLITE", hints: ["Orbits Earth", "Man-made or natural"], meaning: "An object that orbits Earth. The moon is a natural satellite, and humans have made many artificial satellites." },
-                { word: "ECLIPSE", hints: ["Sun or moon blocked", "Can be solar or lunar"], meaning: "When one space object blocks another. A solar eclipse happens when the moon blocks the sun." },
-                { word: "CONSTELLATION", hints: ["Star pattern", "Looks like pictures"], meaning: "A pattern of stars in the sky. Constellations are named after animals, people, or objects." },
-                { word: "NEBULA", hints: ["Space cloud", "Where stars form"], meaning: "A giant cloud of dust and gas in space. New stars are born inside nebulae." },
-                { word: "BLACKHOLE", hints: ["Very strong gravity", "Nothing escapes it"], meaning: "A place in space with gravity so strong that nothing, not even light, can escape." },
-                { word: "GRAVITY", hints: ["Pulls things down", "Keeps us on Earth"], meaning: "The force that pulls objects toward each other. Gravity keeps us on Earth and planets orbiting the sun." },
-                { word: "UNIVERSE", hints: ["Everything that exists", "Very, very big"], meaning: "Everything that exists - all space, time, matter, and energy. The universe is incredibly large." },
-                { word: "ATMOSPHERE", hints: ["Air around Earth", "What we breathe"], meaning: "The layer of gases that surrounds Earth. The atmosphere gives us air to breathe and protects us from space." },
-                { word: "OXYGEN", hints: ["Gas we breathe", "In air and water"], meaning: "A gas in the air that people and animals need to breathe. Plants make oxygen through photosynthesis." },
-                { word: "CRATER", hints: ["Hole on moon", "Made by impacts"], meaning: "A bowl-shaped hole on the surface of a planet or moon. Craters are often made when space rocks hit the surface." },
-                { word: "ROVER", hints: ["Robot on Mars", "Explores planets"], meaning: "A robot vehicle that explores the surface of other planets. Rovers have been sent to Mars to take pictures and collect samples." },
-                { word: "ORBITER", hints: ["Spacecraft that orbits", "Takes pictures from above"], meaning: "A spacecraft that goes around a planet or moon. Orbiters take pictures and collect information from space." },
-                { word: "LAUNCH", hints: ["Send into space", "Rocket takes off"], meaning: "To send a spacecraft into space. Rockets launch from Earth with powerful engines." },
-                { word: "MILKYWAY", hints: ["Our galaxy", "Has billions of stars"], meaning: "The galaxy that contains our solar system. The Milky Way has billions of stars and looks like a milky band in the night sky." },
-                { word: "SATELLITE", hints: ["Man-made object in space", "Used for communication"], meaning: "A human-made object that orbits Earth. Satellites are used for TV, weather forecasts, and GPS." },
-                { word: "SPACESTATION", hints: ["Home in space", "Where astronauts live"], meaning: "A large spacecraft where astronauts live and work in space for long periods." },
-                { word: "COSMONAUT", hints: ["Russian astronaut", "Space traveler"], meaning: "The Russian word for astronaut. Cosmonauts are people from Russia who travel to space." },
-                { word: "SPACESUIT", hints: ["Special clothing", "Worn in space"], meaning: "Special clothing that protects astronauts in space. Spacesuits provide air to breathe and protect from temperature extremes." },
-                { word: "ZERO G", hints: ["No gravity", "Floating in space"], meaning: "Short for zero gravity. In zero G, things float because there's no gravity pulling them down." },
-                { word: "METEORITE", hints: ["Space rock that hits Earth", "Found on ground"], meaning: "A meteor that survives its trip through the atmosphere and lands on Earth's surface." },
-                { word: "OBSERVATORY", hints: ["Building with telescope", "For watching stars"], meaning: "A building with a large telescope for looking at space. Astronomers work in observatories." },
-                { word: "SOLARSYSTEM", hints: ["Sun and planets", "Our cosmic neighborhood"], meaning: "Our sun and everything that orbits it, including planets, moons, asteroids, and comets." },
-                { word: "AURORA", hints: ["Northern lights", "Colorful sky lights"], meaning: "Beautiful colored lights in the sky near the North and South Poles. Auroras are caused by particles from the sun." },
-                { word: "COSMOS", hints: ["Another word for universe", "Everything in space"], meaning: "Another word for the universe. The cosmos includes all of space and everything in it." },
-                { word: "QUASAR", hints: ["Very bright object", "Far away in space"], meaning: "An extremely bright object in space. Quasars are among the most distant objects we can see." },
-                { word: "PULSAR", hints: ["Spinning star", "Sends radio waves"], meaning: "A spinning star that sends out beams of radiation. Pulsars are like cosmic lighthouses." },
-                { word: "SUPERNOVA", hints: ["Exploding star", "Very bright explosion"], meaning: "A huge explosion that happens when a star dies. Supernovas can be brighter than entire galaxies." }
+                { word: "MOON", hints: ["Orbits Earth", "Shines at night"], meaning: "The natural satellite that orbits Earth." },
+                { word: "STAR", hints: ["Twinkles at night", "Our sun is one"], meaning: "A giant ball of gas that shines in space." },
+                { word: "SUN", hints: ["Center of our solar system", "Gives us light"], meaning: "The star at the center of our solar system." },
+                { word: "EARTH", hints: ["Our home planet", "Has land and water"], meaning: "The planet we live on." },
+                { word: "MARS", hints: ["The red planet", "Fourth from the sun"], meaning: "The fourth planet from the sun." },
+                { word: "COMET", hints: ["Has a tail", "Made of ice and dust"], meaning: "A space object made of ice and dust." },
+                { word: "ORBIT", hints: ["Path around a planet or star", "Earth does this around the sun"], meaning: "The curved path that an object takes around a planet or star." },
+                { word: "ROCKET", hints: ["Flies into space", "Has engines"], meaning: "A vehicle that can travel into space." },
+                { word: "ALIEN", hints: ["Not from Earth", "Space creature"], meaning: "A being that might live on another planet." },
+                { word: "UFO", hints: ["Flying object", "Not from Earth"], meaning: "Short for 'Unidentified Flying Object'." },
+                { word: "VENUS", hints: ["Brightest planet", "Very hot surface"], meaning: "The second planet from the sun." },
+                { word: "METEOR", hints: ["Shooting star", "Burns up in atmosphere"], meaning: "A space rock that burns up in Earth's atmosphere." },
+                { word: "GALAXY", hints: ["Group of stars", "Milky Way is one"], meaning: "A huge collection of stars, gas, and dust." },
+                { word: "SATURN", hints: ["Has rings", "Sixth planet from sun"], meaning: "The sixth planet from the sun, famous for its rings." },
+                { word: "JUPITER", hints: ["Largest planet", "Has a red spot"], meaning: "The largest planet in our solar system." },
+                { word: "MERCURY", hints: ["Closest to sun", "Smallest planet"], meaning: "The smallest planet and the one closest to the sun." },
+                { word: "NEPTUNE", hints: ["Blue planet", "Very windy"], meaning: "A blue planet that is the windiest in our solar system." },
+                { word: "URANUS", hints: ["Spins on its side", "Ice giant"], meaning: "A planet that spins on its side." },
+                { word: "PLUTO", hints: ["Dwarf planet", "Very far from sun"], meaning: "A dwarf planet at the edge of our solar system." },
+                { word: "ASTEROID", hints: ["Space rock", "Orbits the sun"], meaning: "A rocky object that orbits the sun." },
+                { word: "ASTRONAUT", hints: ["Space traveler", "Wears special suit"], meaning: "A person who travels to space." },
+                { word: "TELESCOPE", hints: ["Makes stars look closer", "Used by astronomers"], meaning: "A tool that makes distant objects in space look closer." },
+                { word: "SPACESHIP", hints: ["Vehicle for space", "Carries astronauts"], meaning: "A vehicle designed to travel in space." },
+                { word: "SATELLITE", hints: ["Orbits Earth", "Man-made or natural"], meaning: "An object that orbits Earth." },
+                { word: "ECLIPSE", hints: ["Sun or moon blocked", "Can be solar or lunar"], meaning: "When one space object blocks another." },
+                { word: "CONSTELLATION", hints: ["Star pattern", "Looks like pictures"], meaning: "A pattern of stars in the sky." },
+                { word: "NEBULA", hints: ["Space cloud", "Where stars form"], meaning: "A giant cloud of dust and gas in space." },
+                { word: "BLACKHOLE", hints: ["Very strong gravity", "Nothing escapes it"], meaning: "A place in space with gravity so strong that nothing can escape." },
+                { word: "GRAVITY", hints: ["Pulls things down", "Keeps us on Earth"], meaning: "The force that pulls objects toward each other." },
+                { word: "UNIVERSE", hints: ["Everything that exists", "Very, very big"], meaning: "Everything that exists - all space, time, matter, and energy." },
+                { word: "ATMOSPHERE", hints: ["Air around Earth", "What we breathe"], meaning: "The layer of gases that surrounds Earth." },
+                { word: "OXYGEN", hints: ["Gas we breathe", "In air and water"], meaning: "A gas in the air that people and animals need to breathe." },
+                { word: "CRATER", hints: ["Hole on moon", "Made by impacts"], meaning: "A bowl-shaped hole on the surface of a planet or moon." },
+                { word: "ROVER", hints: ["Robot on Mars", "Explores planets"], meaning: "A robot vehicle that explores the surface of other planets." },
+                { word: "LAUNCH", hints: ["Send into space", "Rocket takes off"], meaning: "To send a spacecraft into space." },
+                { word: "MILKYWAY", hints: ["Our galaxy", "Has billions of stars"], meaning: "The galaxy that contains our solar system." },
+                { word: "SPACESTATION", hints: ["Home in space", "Where astronauts live"], meaning: "A large spacecraft where astronauts live and work in space." },
+                { word: "COSMONAUT", hints: ["Russian astronaut", "Space traveler"], meaning: "The Russian word for astronaut." },
+                { word: "SPACESUIT", hints: ["Special clothing", "Worn in space"], meaning: "Special clothing that protects astronauts in space." },
+                { word: "ZERO G", hints: ["No gravity", "Floating in space"], meaning: "Short for zero gravity." },
+                { word: "METEORITE", hints: ["Space rock that hits Earth", "Found on ground"], meaning: "A meteor that survives its trip through the atmosphere." },
+                { word: "OBSERVATORY", hints: ["Building with telescope", "For watching stars"], meaning: "A building with a large telescope for looking at space." },
+                { word: "SOLARSYSTEM", hints: ["Sun and planets", "Our cosmic neighborhood"], meaning: "Our sun and everything that orbits it." },
+                { word: "AURORA", hints: ["Northern lights", "Colorful sky lights"], meaning: "Beautiful colored lights in the sky near the poles." },
+                { word: "COSMOS", hints: ["Another word for universe", "Everything in space"], meaning: "Another word for the universe." },
+                { word: "QUASAR", hints: ["Very bright object", "Far away in space"], meaning: "An extremely bright object in space." },
+                { word: "PULSAR", hints: ["Spinning star", "Sends radio waves"], meaning: "A spinning star that sends out beams of radiation." },
+                { word: "SUPERNOVA", hints: ["Exploding star", "Very bright explosion"], meaning: "A huge explosion that happens when a star dies." },
+                { word: "DWARF", hints: ["Small star", "Like our sun"], meaning: "A small to medium-sized star." },
+                { word: "GIANT", hints: ["Large star", "Red or blue"], meaning: "A very large star." }
             ],
             home: [
-                { word: "TABLE", hints: ["Has legs", "You eat at it"], meaning: "A piece of furniture with a flat top and legs. People use tables for eating, working, and playing games." },
-                { word: "CHAIR", hints: ["Has a seat", "You sit on it"], meaning: "A piece of furniture for sitting on. Chairs usually have four legs, a seat, and a back." },
-                { word: "BED", hints: ["You sleep on it", "Has a mattress"], meaning: "A piece of furniture for sleeping. Beds usually have a mattress, pillows, and blankets." },
-                { word: "DOOR", hints: ["Opens and closes", "Go through it to enter"], meaning: "A movable barrier that opens and closes the entrance to a room or building. Doors help keep our homes safe and private." },
-                { word: "CLOCK", hints: ["Tells time", "Has hands"], meaning: "A device that shows what time it is. Clocks help us know when to wake up, eat, and go to bed." },
-                { word: "PHONE", hints: ["You talk on it", "Has numbers"], meaning: "A device for talking to people who are far away. Phones let us hear each other's voices even when we're in different places." },
-                { word: "LIGHT", hints: ["Brightens a room", "Turn it on at night"], meaning: "Something that makes a room bright so we can see. We use lamps, ceiling lights, and flashlights to create light." },
-                { word: "BOOK", hints: ["Has pages", "You read it"], meaning: "A collection of pages with words and pictures. Books help us learn new things and tell us interesting stories." },
-                { word: "WINDOW", hints: ["You look through it", "Lets light in"], meaning: "An opening in a wall with glass that lets light in and lets us see outside. Windows can be opened to let fresh air in." },
-                { word: "HOUSE", hints: ["Where people live", "Has rooms"], meaning: "A building where people live. Houses protect us from weather and give us a place to sleep, eat, and play." },
-                { word: "SOFA", hints: ["Long seat", "For sitting with family"], meaning: "A long comfortable seat for several people. Sofas are found in living rooms for relaxing and watching TV." },
-                { word: "CUP", hints: ["Holds drinks", "Has a handle"], meaning: "A small container for drinking from. Cups usually have handles and can be made of ceramic, plastic, or glass." },
-                { word: "BOWL", hints: ["Holds food", "Round and deep"], meaning: "A round dish used for serving food like soup or cereal. Bowls are deeper than plates." },
-                { word: "KNIFE", hints: ["Cuts food", "Has a sharp edge"], meaning: "A tool with a sharp blade used for cutting food. Knives should be handled carefully by adults." },
-                { word: "SPOON", hints: ["For eating soup", "Has a round end"], meaning: "A utensil with a small bowl at the end, used for eating foods like soup, cereal, or ice cream." },
-                { word: "FORK", hints: ["Has points", "Used for eating"], meaning: "A utensil with several points (tines) used for picking up food. Forks help us eat without using our hands." },
-                { word: "PLATE", hints: ["Flat dish", "Food goes on it"], meaning: "A flat, usually round dish used for serving food. Plates keep food from getting on the table." },
-                { word: "GLASS", hints: ["Made of glass", "You drink from it"], meaning: "A drinking container made of glass. Glasses are see-through and can break if dropped." },
-                { word: "MIRROR", hints: ["Shows your reflection", "You look in it"], meaning: "A smooth surface that shows your reflection. Mirrors help us see what we look like." },
-                { word: "RUG", hints: ["Small carpet", "On floor"], meaning: "A small carpet that covers part of a floor. Rugs can make rooms cozy and help keep feet warm." },
-                { word: "SHELF", hints: ["Holds things up", "Books go on it"], meaning: "A flat surface attached to a wall or in a bookcase. Shelves hold books, toys, and decorations." },
-                { word: "DRAWER", hints: ["Slides open", "Holds clothes"], meaning: "A box that slides in and out of furniture. Drawers help organize clothes, utensils, and other items." },
-                { word: "CURTAIN", hints: ["Covers window", "Made of fabric"], meaning: "A piece of fabric that covers a window. Curtains can be opened to let light in or closed for privacy." },
-                { word: "PILLOW", hints: ["Soft for head", "On bed"], meaning: "A soft cushion for your head when sleeping or resting. Pillows make beds more comfortable." },
-                { word: "BLANKET", hints: ["Keeps you warm", "On bed"], meaning: "A warm covering used on beds. Blankets help keep you cozy when sleeping or resting." },
-                { word: "CLOSET", hints: ["Holds clothes", "Has a door"], meaning: "A small room or space for storing clothes. Closets usually have rods for hanging clothes on hangers." },
-                { word: "STAIRS", hints: ["Steps up and down", "Between floors"], meaning: "A series of steps that go from one floor to another. Stairs help people move between different levels of a building." },
-                { word: "FIREPLACE", hints: ["Holds fire", "Makes warmth"], meaning: "A structure for holding a fire inside a house. Fireplaces provide warmth and can make a room feel cozy." },
-                { word: "GARAGE", hints: ["For cars", "Attached to house"], meaning: "A building or part of a house where cars are kept. Garages protect cars from weather and can also be used for storage." },
-                { word: "YARD", hints: ["Outside area", "Has grass"], meaning: "The area of land around a house. Yards often have grass, trees, and space for playing." },
-                { word: "FENCE", hints: ["Around yard", "Keeps things in"], meaning: "A barrier that goes around a yard or property. Fences can provide privacy and keep pets safe." },
-                { word: "GATE", hints: ["Door in fence", "Opens to yard"], meaning: "An opening in a fence with a door that can be opened and closed. Gates let people enter and exit yards." },
-                { word: "ROOF", hints: ["Top of house", "Keeps rain out"], meaning: "The top covering of a building. Roofs protect houses from rain, snow, and sun." },
-                { word: "WALL", hints: ["Side of room", "Has paint"], meaning: "The vertical surface that forms the side of a room or building. Walls divide spaces and support the roof." },
-                { word: "FLOOR", hints: ["You walk on it", "Bottom of room"], meaning: "The bottom surface of a room that you walk on. Floors can be made of wood, tile, or carpet." },
-                { word: "CEILING", hints: ["Top of room", "Above your head"], meaning: "The top surface of a room, above your head. Ceilings can have lights and fans attached." },
-                { word: "KEY", hints: ["Opens locks", "Small metal object"], meaning: "A small metal object used to open locks. Keys help keep doors secure so only certain people can open them." },
-                { word: "LOCK", hints: ["Keeps door closed", "Needs a key"], meaning: "A device that keeps a door or container closed. Locks need keys or combinations to open." },
-                { word: "MAILBOX", hints: ["Holds letters", "Outside house"], meaning: "A box where mail is delivered. Mailboxes are usually outside houses and have a flag to show when there's mail." },
-                { word: "GARDEN", hints: ["Growing plants", "In yard"], meaning: "An area where plants like flowers, vegetables, or herbs are grown. Gardens can be beautiful and provide food." },
-                { word: "SHOWER", hints: ["Water falls on you", "For washing"], meaning: "A device that sprays water for washing your body. Showers use less water than baths." },
-                { word: "BATHTUB", hints: ["You sit in it", "Full of water"], meaning: "A large container for holding water to wash your body. Bathtubs are great for relaxing baths." },
-                { word: "SINK", hints: ["Has faucet", "For washing hands"], meaning: "A bowl-shaped fixture with a faucet. Sinks are used for washing hands, face, and dishes." },
-                { word: "TOILET", hints: ["In bathroom", "Flushes waste"], meaning: "A fixture in bathrooms for disposing of human waste. Toilets use water to flush waste away." },
-                { word: "TOWEL", hints: ["Dries you", "Made of fabric"], meaning: "A piece of absorbent fabric used for drying after washing. Towels come in different sizes for different uses." },
-                { word: "SOAP", hints: ["For washing", "Makes bubbles"], meaning: "A substance used with water for cleaning. Soap helps remove dirt and germs from skin and objects." },
-                { word: "SHAMPOO", hints: ["For hair washing", "Makes lather"], meaning: "A liquid soap made especially for washing hair. Shampoo cleans hair and can make it smell nice." },
-                { word: "TOOTHBRUSH", hints: ["Cleans teeth", "Has bristles"], meaning: "A small brush used for cleaning teeth. Toothbrushes help keep teeth healthy and prevent cavities." },
-                { word: "TOOTHPASTE", hints: ["On toothbrush", "Cleans teeth"], meaning: "A paste used with a toothbrush to clean teeth. Toothpaste makes your mouth feel fresh and clean." },
-                { word: "COMB", hints: ["For hair", "Has teeth"], meaning: "A flat piece of plastic or metal with teeth, used to arrange hair. Combs help make hair neat and remove tangles." },
-                { word: "BRUSH", hints: ["For hair or painting", "Has bristles"], meaning: "A tool with bristles used for hair care or painting. Hair brushes smooth hair, and paint brushes apply color." }
+                { word: "TABLE", hints: ["Has legs", "You eat at it"], meaning: "A piece of furniture with a flat top and legs." },
+                { word: "CHAIR", hints: ["Has a seat", "You sit on it"], meaning: "A piece of furniture for sitting on." },
+                { word: "BED", hints: ["You sleep on it", "Has a mattress"], meaning: "A piece of furniture for sleeping." },
+                { word: "DOOR", hints: ["Opens and closes", "Go through it to enter"], meaning: "A movable barrier that opens and closes the entrance." },
+                { word: "CLOCK", hints: ["Tells time", "Has hands"], meaning: "A device that shows what time it is." },
+                { word: "PHONE", hints: ["You talk on it", "Has numbers"], meaning: "A device for talking to people who are far away." },
+                { word: "LIGHT", hints: ["Brightens a room", "Turn it on at night"], meaning: "Something that makes a room bright so we can see." },
+                { word: "BOOK", hints: ["Has pages", "You read it"], meaning: "A collection of pages with words and pictures." },
+                { word: "WINDOW", hints: ["You look through it", "Lets light in"], meaning: "An opening in a wall with glass." },
+                { word: "HOUSE", hints: ["Where people live", "Has rooms"], meaning: "A building where people live." },
+                { word: "ROOF", hints: ["Top of a house", "Protects from rain"], meaning: "The top covering of a building." },
+                { word: "FLOOR", hints: ["You walk on it", "Bottom of a room"], meaning: "The bottom surface of a room." },
+                { word: "WALL", hints: ["Side of a room", "You hang pictures on it"], meaning: "A vertical surface that forms the side of a room." },
+                { word: "SOFA", hints: ["Soft seat for many", "Also called couch"], meaning: "A long, comfortable seat with a back and arms." },
+                { word: "SINK", hints: ["Wash hands here", "Has faucet"], meaning: "A basin used for washing hands or dishes." },
+                { word: "SHOWER", hints: ["Wash yourself", "Water falls from above"], meaning: "A device for washing the body with water." },
+                { word: "TOILET", hints: ["In bathroom", "Flushes"], meaning: "A fixture for disposing of bodily waste." },
+                { word: "FRIDGE", hints: ["Keeps food cold", "Also called refrigerator"], meaning: "An appliance that keeps food cold." },
+                { word: "STOVE", hints: ["Cooks food", "Has burners"], meaning: "An appliance for cooking food." },
+                { word: "OVEN", hints: ["Bakes food", "Gets very hot"], meaning: "An enclosed compartment for baking or roasting." },
+                { word: "MICROWAVE", hints: ["Heats food quickly", "Uses radiation"], meaning: "An appliance that heats food quickly." },
+                { word: "CUPBOARD", hints: ["Stores dishes", "Has doors"], meaning: "A cabinet for storing dishes or food." },
+                { word: "DRAWER", hints: ["Slides open", "Stores things"], meaning: "A box-shaped container that slides in and out." },
+                { word: "MIRROR", hints: ["Shows reflection", "You look in it"], meaning: "A surface that reflects light to show an image." },
+                { word: "CARPET", hints: ["Soft floor covering", "Made of fabric"], meaning: "A thick fabric covering for floors." },
+                { word: "CURTAIN", hints: ["Covers window", "Can open and close"], meaning: "A piece of fabric that covers a window." },
+                { word: "BLANKET", hints: ["Keeps you warm", "On a bed"], meaning: "A large piece of fabric used for warmth." },
+                { word: "PILLOW", hints: ["Soft head rest", "On a bed"], meaning: "A cushion for the head, especially during sleep." },
+                { word: "TOWEL", hints: ["Dries things", "Used after bath"], meaning: "A piece of fabric used for drying." },
+                { word: "BROOM", hints: ["Cleans floors", "Has bristles"], meaning: "A tool with bristles for sweeping floors." },
+                { word: "VACUUM", hints: ["Cleans carpets", "Sucks up dirt"], meaning: "An appliance that cleans by suction." },
+                { word: "LADDER", hints: ["Climb up high", "Has steps"], meaning: "A device with rungs for climbing." },
+                { word: "HAMMER", hints: ["Hits nails", "Tool for building"], meaning: "A tool with a heavy head for driving nails." },
+                { word: "SCREW", hints: ["Holds things together", "Twists in"], meaning: "A metal fastener with a spiral thread." },
+                { word: "NAIL", hints: ["Holds wood together", "Hammer hits it"], meaning: "A small metal spike used to join things." },
+                { word: "PLIERS", hints: ["Grips things", "Tool with jaws"], meaning: "A tool with jaws for gripping objects." },
+                { word: "WRENCH", hints: ["Turns nuts", "Adjustable tool"], meaning: "A tool for turning nuts or bolts." },
+                { word: "SAW", hints: ["Cuts wood", "Has teeth"], meaning: "A tool with a toothed blade for cutting." },
+                { word: "DRILL", hints: ["Makes holes", "Rotating tool"], meaning: "A tool for making holes in materials." },
+                { word: "PAINT", hints: ["Colors walls", "Applied with brush"], meaning: "A colored liquid applied to surfaces." },
+                { word: "BRUSH", hints: ["Applies paint", "Has bristles"], meaning: "A tool with bristles for applying paint." },
+                { word: "ROLLER", hints: ["Paints walls", "Cylindrical tool"], meaning: "A cylindrical tool for applying paint." },
+                { word: "TAPE", hints: ["Sticks things", "Comes on a roll"], meaning: "A strip of material with adhesive on one side." },
+                { word: "GLUE", hints: ["Sticks things together", "Dries hard"], meaning: "A substance used to stick things together." },
+                { word: "SCISSORS", hints: ["Cuts paper", "Two blades"], meaning: "A tool with two blades for cutting." },
+                { word: "KNIFE", hints: ["Cuts food", "Has sharp blade"], meaning: "A tool with a sharp blade for cutting." },
+                { word: "FORK", hints: ["Eats food", "Has prongs"], meaning: "An eating utensil with prongs." },
+                { word: "SPOON", hints: ["Eats soup", "Has bowl shape"], meaning: "An eating utensil with a small bowl." },
+                { word: "PLATE", hints: ["Food goes on it", "Round and flat"], meaning: "A flat dish for serving food." },
+                { word: "BOWL", hints: ["Holds soup", "Round and deep"], meaning: "A round, deep dish for holding food." }
             ],
             technology: [
-                { word: "COMPUTER", hints: ["Has a screen", "You type on it"], meaning: "An electronic device that can store information and do many tasks. People use computers for work, games, and learning." },
-                { word: "MOUSE", hints: ["Used with a computer", "Clicks and scrolls"], meaning: "A small device that moves the cursor on a computer screen. Computer mice have buttons to click on things." },
-                { word: "SCREEN", hints: ["Shows pictures", "Part of a TV or computer"], meaning: "The flat surface on TVs, computers, and phones that shows images and videos." },
-                { word: "INTERNET", hints: ["Connects computers", "Where websites are"], meaning: "A worldwide network that connects computers. The internet lets people share information and talk to each other from far away." },
-                { word: "ROBOT", hints: ["Machine that moves", "Can do tasks"], meaning: "A machine that can move and do tasks automatically. Some robots are controlled by computers, and some can learn on their own." },
-                { word: "CAMERA", hints: ["Takes pictures", "Has a lens"], meaning: "A device that captures photographs or videos. Cameras save special moments so we can look at them again later." },
-                { word: "VIDEO", hints: ["Moving pictures", "Watch it on a screen"], meaning: "A recording of moving pictures with sound. People watch videos to learn, be entertained, or see memories." },
-                { word: "APP", hints: ["On a phone or tablet", "Helps you do things"], meaning: "Short for 'application'. An app is a program on a phone, tablet, or computer that helps you do specific tasks." },
-                { word: "BATTERY", hints: ["Powers devices", "Needs charging"], meaning: "A device that stores electricity to power things like toys, phones, and flashlights. Batteries need to be recharged or replaced when they run out." },
-                { word: "DRONE", hints: ["Flies without a pilot", "Has propellers"], meaning: "A flying machine that doesn't have a pilot inside. Drones are controlled remotely and can take pictures from the sky." },
-                { word: "TABLET", hints: ["Like a big phone", "Touch screen"], meaning: "A portable computer with a touch screen. Tablets are bigger than phones but smaller than laptops." },
-                { word: "PRINTER", hints: ["Makes paper copies", "Uses ink"], meaning: "A machine that puts text and pictures on paper from a computer. Printers use ink or toner to create copies." },
-                { word: "KEYBOARD", hints: ["Has letters", "You type with it"], meaning: "A set of keys on a computer for typing words and numbers. Keyboards also have special keys for different functions." },
-                { word: "SPEAKER", hints: ["Makes sound louder", "Plays music"], meaning: "A device that makes sound louder so you can hear it better. Speakers are used with computers, phones, and music players." },
-                { word: "CHARGER", hints: ["Powers batteries", "Plugs into wall"], meaning: "A device that gives electricity to recharge batteries in phones, tablets, and other electronics." },
-                { word: "HEADPHONES", hints: ["Worn on ears", "For listening"], meaning: "A pair of small speakers worn over the ears. Headphones let you listen to music or videos without disturbing others." },
-                { word: "MICROPHONE", hints: ["Records sound", "Makes voice louder"], meaning: "A device that captures sound and converts it to electrical signals. Microphones are used for recording voices or making them louder." },
-                { word: "WEBCAM", hints: ["Camera for computer", "For video calls"], meaning: "A small camera that connects to a computer. Webcams are used for video calls and taking pictures for the computer." },
-                { word: "MONITOR", hints: ["Computer screen", "Shows images"], meaning: "The screen part of a computer system. Monitors display text, pictures, and videos from the computer." },
-                { word: "LAPTOP", hints: ["Portable computer", "Folds closed"], meaning: "A portable computer that can be closed like a book. Laptops have built-in screens and keyboards." },
-                { word: "PHONE", hints: ["Makes calls", "Fits in pocket"], meaning: "A device for talking to people who are far away. Modern phones can also send messages, take pictures, and run apps." },
-                { word: "REMOTE", hints: ["Controls TV", "No wires"], meaning: "A handheld device that controls electronics like TVs from a distance. Remotes use infrared or radio signals." },
-                { word: "GAME", hints: ["Fun to play", "On computer or console"], meaning: "An activity played for entertainment. Video games are played on computers, consoles, or phones." },
-                { word: "CONSOLE", hints: ["Plays video games", "Connects to TV"], meaning: "A device specifically designed for playing video games. Game consoles connect to TVs and use controllers." },
-                { word: "CONTROLLER", hints: ["For playing games", "Has buttons"], meaning: "A handheld device used to control video games. Controllers have buttons, joysticks, and sometimes motion sensors." },
-                { word: "WEBSITE", hints: ["On internet", "Has information"], meaning: "A collection of web pages on the internet. Websites can have games, videos, information, or shops." },
-                { word: "EMAIL", hints: ["Electronic mail", "Sent online"], meaning: "Messages sent electronically through the internet. Email is much faster than regular mail and can include attachments." },
-                { word: "PASSWORD", hints: ["Secret code", "Protects accounts"], meaning: "A secret word or phrase used to prove identity. Passwords protect accounts and devices from unauthorized access." },
-                { word: "WIFI", hints: ["Wireless internet", "Connects devices"], meaning: "Technology that allows devices to connect to the internet without wires. WiFi lets computers, phones, and tablets go online." },
-                { word: "BLUETOOTH", hints: ["Wireless connection", "For devices nearby"], meaning: "A wireless technology for connecting devices over short distances. Bluetooth connects phones to speakers, headphones, and cars." },
-                { word: "USB", hints: ["Small connector", "Transfers data"], meaning: "A standard type of connector for cables. USB cables can charge devices and transfer information between them." },
-                { word: "CLOUD", hints: ["Online storage", "Not a real cloud"], meaning: "Internet-based storage and computing services. The cloud lets you save files online and access them from anywhere." },
-                { word: "VIRUS", hints: ["Bad software", "Hurts computers"], meaning: "Malicious software that can damage computers or steal information. Antivirus programs protect against viruses." },
-                { word: "DOWNLOAD", hints: ["Get from internet", "Save to device"], meaning: "To copy data from the internet to your own device. People download apps, music, videos, and documents." },
-                { word: "UPLOAD", hints: ["Send to internet", "From your device"], meaning: "To send data from your device to the internet. People upload photos, videos, and documents to share with others." },
-                { word: "STREAM", hints: ["Watch online", "Without downloading"], meaning: "To watch or listen to media over the internet without downloading it first. Streaming is used for movies, music, and shows." },
-                { word: "SOCIAL", hints: ["Connects people", "Online platform"], meaning: "Short for social media - websites and apps where people connect and share content. Examples include Facebook, Instagram, and TikTok." },
-                { word: "SEARCH", hints: ["Find information", "On internet"], meaning: "To look for information on the internet. Search engines like Google help people find what they're looking for online." },
-                { word: "BROWSER", hints: ["Views websites", "Like Chrome or Safari"], meaning: "A program used to access and view websites on the internet. Popular browsers include Chrome, Safari, and Firefox." },
-                { word: "SCROLL", hints: ["Move up/down", "On screen"], meaning: "To move content up or down on a screen. People scroll through websites, documents, and social media feeds." },
-                { word: "CLICK", hints: ["Press mouse button", "Select something"], meaning: "To press and release a button on a computer mouse. Clicking selects items or activates commands on a computer." },
-                { word: "TAP", hints: ["Touch screen", "Like clicking"], meaning: "To briefly touch a touchscreen with your finger. Tapping on phones and tablets is like clicking with a mouse." },
-                { word: "SWIPE", hints: ["Slide finger", "On touchscreen"], meaning: "To move your finger across a touchscreen. Swiping is used to scroll, change pages, or perform actions on phones and tablets." },
-                { word: "ZOOM", hints: ["Make bigger/smaller", "On screen"], meaning: "To make content on a screen appear larger or smaller. Zooming helps see details or get an overview of something." },
-                { word: "SCAN", hints: ["Copy to computer", "From paper"], meaning: "To use a scanner to create a digital copy of a paper document or photo. Scanning saves paper documents as computer files." },
-                { word: "FAX", hints: ["Send documents", "Over phone line"], meaning: "A machine that sends copies of documents over telephone lines. Fax machines were more common before email became popular." },
-                { word: "MODEM", hints: ["Connects to internet", "Through phone/cable"], meaning: "A device that connects a computer to the internet through phone or cable lines. Modems translate digital information for transmission." },
-                { word: "ROUTER", hints: ["Shares internet", "In home or office"], meaning: "A device that shares an internet connection with multiple devices. Routers create WiFi networks for homes and offices." },
-                { word: "SERVER", hints: ["Powerful computer", "Stores websites"], meaning: "A powerful computer that stores websites, files, or applications. Servers provide services to other computers on a network." },
-                { word: "BACKUP", hints: ["Extra copy", "Protects data"], meaning: "A copy of computer data kept in case the original is lost or damaged. Regular backups protect important files and photos." },
-                { word: "UPDATE", hints: ["Make software newer", "Fixes problems"], meaning: "To install a newer version of software. Updates often fix problems, add features, or improve security." }
+                { word: "COMPUTER", hints: ["Has a screen", "You type on it"], meaning: "An electronic device that can store information and do many tasks." },
+                { word: "MOUSE", hints: ["Used with a computer", "Clicks and scrolls"], meaning: "A small device that moves the cursor on a computer screen." },
+                { word: "SCREEN", hints: ["Shows pictures", "Part of a TV or computer"], meaning: "The flat surface on TVs, computers, and phones that shows images." },
+                { word: "INTERNET", hints: ["Connects computers", "Where websites are"], meaning: "A worldwide network that connects computers." },
+                { word: "ROBOT", hints: ["Machine that moves", "Can do tasks"], meaning: "A machine that can move and do tasks automatically." },
+                { word: "CAMERA", hints: ["Takes pictures", "Has a lens"], meaning: "A device that captures photographs or videos." },
+                { word: "VIDEO", hints: ["Moving pictures", "Watch it on a screen"], meaning: "A recording of moving pictures with sound." },
+                { word: "APP", hints: ["On a phone or tablet", "Helps you do things"], meaning: "Short for 'application'. A program on a device." },
+                { word: "BATTERY", hints: ["Powers devices", "Needs charging"], meaning: "A device that stores electricity to power things." },
+                { word: "DRONE", hints: ["Flies without a pilot", "Has propellers"], meaning: "A flying machine that doesn't have a pilot inside." },
+                { word: "PHONE", hints: ["Makes calls", "Has touchscreen"], meaning: "A device for talking to people far away." },
+                { word: "TABLET", hints: ["Portable computer", "Touch screen"], meaning: "A flat, portable computer with a touchscreen." },
+                { word: "KEYBOARD", hints: ["You type on it", "Has letters"], meaning: "A set of keys for typing on a computer." },
+                { word: "PRINTER", hints: ["Makes paper copies", "Uses ink"], meaning: "A device that produces text or pictures on paper." },
+                { word: "SCANNER", hints: ["Copies pictures", "Digital copy"], meaning: "A device that creates digital copies of documents." },
+                { word: "SPEAKER", hints: ["Makes sound", "Plays music"], meaning: "A device that converts electrical signals into sound." },
+                { word: "HEADPHONES", hints: ["Listen to music", "Worn on head"], meaning: "A pair of speakers worn over the ears." },
+                { word: "MICROPHONE", hints: ["Records sound", "Speak into it"], meaning: "A device that captures sound waves." },
+                { word: "CHARGER", hints: ["Powers devices", "Plugs into wall"], meaning: "A device that supplies electrical power to batteries." },
+                { word: "CABLE", hints: ["Connects devices", "Wires inside"], meaning: "A bundle of wires for connecting devices." },
+                { word: "WIFI", hints: ["Wireless internet", "Connects without cables"], meaning: "A technology for wireless networking." },
+                { word: "BLUETOOTH", hints: ["Wireless connection", "Connects devices"], meaning: "A wireless technology for connecting devices." },
+                { word: "USB", hints: ["Connects devices", "Small plug"], meaning: "A standard for connecting devices to computers." },
+                { word: "MEMORY", hints: ["Stores data", "In computer"], meaning: "Computer components that store data." },
+                { word: "PROCESSOR", hints: ["Computer brain", "Calculates fast"], meaning: "The main chip in a computer that performs calculations." },
+                { word: "SOFTWARE", hints: ["Computer programs", "Not hardware"], meaning: "The programs and operating information used by a computer." },
+                { word: "HARDWARE", hints: ["Physical computer parts", "Not software"], meaning: "The physical components of a computer system." },
+                { word: "WEBSITE", hints: ["On the internet", "Has web pages"], meaning: "A collection of web pages on the internet." },
+                { word: "EMAIL", hints: ["Electronic mail", "Send messages"], meaning: "A system for sending messages electronically." },
+                { word: "PASSWORD", hints: ["Secret code", "Protects account"], meaning: "A secret word or phrase used for authentication." },
+                { word: "ACCOUNT", hints: ["Online identity", "Username and password"], meaning: "A registered identity on a computer system." },
+                { word: "DOWNLOAD", hints: ["Get from internet", "Save to device"], meaning: "To transfer data from the internet to a device." },
+                { word: "UPLOAD", hints: ["Send to internet", "From device"], meaning: "To transfer data from a device to the internet." },
+                { word: "STREAM", hints: ["Watch online", "No downloading"], meaning: "To watch or listen to media over the internet." },
+                { word: "BROWSER", hints: ["Views websites", "Chrome or Safari"], meaning: "A program used to access the internet." },
+                { word: "SEARCH", hints: ["Find information", "Use Google"], meaning: "To look for information on the internet." },
+                { word: "CLOUD", hints: ["Online storage", "Not on device"], meaning: "Internet-based storage and computing services." },
+                { word: "VIRUS", hints: ["Bad software", "Harms computer"], meaning: "Malicious software that damages computer systems." },
+                { word: "FIREWALL", hints: ["Protects computer", "Blocks threats"], meaning: "A security system that monitors network traffic." },
+                { word: "BACKUP", hints: ["Copy of data", "For safety"], meaning: "A copy of computer data for recovery purposes." },
+                { word: "UPDATE", hints: ["Improves software", "New version"], meaning: "A new improved version of software." },
+                { word: "INSTALL", hints: ["Add software", "Set up program"], meaning: "To set up software on a computer." },
+                { word: "UNINSTALL", hints: ["Remove software", "Delete program"], meaning: "To remove software from a computer." },
+                { word: "RESTART", hints: ["Turn off and on", "Fixes problems"], meaning: "To turn a computer off and on again." },
+                { word: "SHUTDOWN", hints: ["Turn off computer", "Close all"], meaning: "To turn a computer off completely." },
+                { word: "LOGIN", hints: ["Enter account", "Username needed"], meaning: "To gain access to a computer system." },
+                { word: "LOGOUT", hints: ["Exit account", "End session"], meaning: "To exit a computer system." },
+                { word: "SETTINGS", hints: ["Adjust options", "Customize device"], meaning: "Options for customizing a device or program." },
+                { word: "NOTIFICATION", hints: ["Alert message", "On phone or computer"], meaning: "A message that alerts the user to something." },
+                { word: "ALARM", hints: ["Wake-up call", "On phone or clock"], meaning: "A device that makes a sound at a set time." }
             ],
             art: [
-                { word: "PAINT", hints: ["Comes in many colors", "Use a brush with it"], meaning: "A colored liquid used to create pictures. Paint can be applied with brushes, fingers, or other tools to make art." },
-                { word: "COLOR", hints: ["Red, blue, yellow", "Makes things bright"], meaning: "What we see when light reflects off objects. Colors make our world beautiful and help artists create interesting pictures." },
-                { word: "BRUSH", hints: ["Has bristles", "Used with paint"], meaning: "A tool with bristles used to apply paint to paper or canvas. Paintbrushes come in different sizes for different types of painting." },
-                { word: "DRAW", hints: ["Make a picture", "Use pencil or crayon"], meaning: "To create a picture using lines and shapes. People draw with pencils, crayons, markers, or chalk." },
-                { word: "CLAY", hints: ["Moldable material", "Used to make sculptures"], meaning: "A soft, moldable material that hardens when baked. Artists use clay to make pots, sculptures, and other objects." },
-                { word: "MUSIC", hints: ["Made with instruments", "Has rhythm and melody"], meaning: "Sounds arranged in a pleasing way. Music can be made with voices, instruments, or both, and it makes people want to dance or sing." },
-                { word: "DANCE", hints: ["Move to music", "Uses your body"], meaning: "Moving your body to music in a rhythmic way. Dancing is a form of expression and exercise that people all over the world enjoy." },
-                { word: "ACT", hints: ["Pretend to be someone else", "Done in plays"], meaning: "To perform a role in a play, movie, or show. Actors use their voices and bodies to tell stories and entertain people." },
-                { word: "STAGE", hints: ["Where performances happen", "Raised platform"], meaning: "A raised platform where performers entertain an audience. Stages are used for plays, concerts, and dance performances." },
-                { word: "SONG", hints: ["Music with words", "You sing it"], meaning: "A musical composition with words that are sung. Songs can tell stories, express feelings, or just be fun to listen to." },
-                { word: "PENCIL", hints: ["Writes with graphite", "Has an eraser"], meaning: "A writing tool made of wood with graphite inside. Pencils can be erased, unlike pens." },
-                { word: "CRAYON", hints: ["Made of wax", "For coloring"], meaning: "A colored stick made of wax used for drawing and coloring. Crayons come in many colors and are great for children's art." },
-                { word: "PAPER", hints: ["Thin material", "You draw on it"], meaning: "A thin material made from wood pulp. Paper is used for writing, drawing, printing, and many other purposes." },
-                { word: "ERASER", hints: ["Removes pencil marks", "Made of rubber"], meaning: "A small object made of rubber used to remove pencil marks from paper. Erasers help fix mistakes when drawing or writing." },
-                { word: "CANVAS", hints: ["Strong fabric", "For painting pictures"], meaning: "A strong, heavy fabric that artists paint on. Canvas is often stretched over a wooden frame to make it tight." },
-                { word: "EASEL", hints: ["Holds canvas", "Stands on floor"], meaning: "A stand that holds a canvas while an artist paints. Easels keep the canvas upright and at a comfortable height." },
-                { word: "PALETTE", hints: ["Mixes colors", "Flat board"], meaning: "A flat surface where artists mix their paints. Palettes can be made of wood, plastic, or glass." },
-                { word: "SKETCH", hints: ["Quick drawing", "Practice artwork"], meaning: "A quick, simple drawing done as practice or preparation. Sketches often become plans for larger artworks." },
-                { word: "PORTRAIT", hints: ["Picture of person", "Shows face"], meaning: "A painting, drawing, or photograph of a person. Portraits usually focus on the person's face and expression." },
-                { word: "LANDSCAPE", hints: ["Picture of scenery", "Shows nature"], meaning: "A painting or drawing of outdoor scenery. Landscapes show natural views like mountains, forests, or fields." },
-                { word: "SCULPTURE", hints: ["3D artwork", "You can touch it"], meaning: "A three-dimensional work of art. Sculptures can be made from clay, stone, metal, wood, or other materials." },
-                { word: "POTTERY", hints: ["Made from clay", "Bowls and cups"], meaning: "Objects made from clay that are hardened by heat. Pottery includes bowls, cups, plates, and vases." },
-                { word: "GLAZE", hints: ["Shiny coating", "On pottery"], meaning: "A glass-like coating applied to pottery. Glaze makes pottery shiny and waterproof after it's fired in a kiln." },
-                { word: "KILN", hints: ["Special oven", "Bakes clay"], meaning: "A special oven used to bake clay pottery at very high temperatures. Kilns harden clay and set glazes." },
-                { word: "MURAL", hints: ["Large painting", "On wall"], meaning: "A large painting done directly on a wall or ceiling. Murals can decorate buildings and tell stories." },
-                { word: "MOSAIC", hints: ["Made of small pieces", "Creates picture"], meaning: "Art made by arranging small pieces of colored material. Mosaics create pictures or patterns from tiles, glass, or stone." },
-                { word: "COLLAGE", hints: ["Pasted materials", "Mixed media"], meaning: "Art made by gluing various materials to a surface. Collages can include paper, photos, fabric, and other items." },
-                { word: "PASTEL", hints: ["Colorful chalk", "Soft colors"], meaning: "A type of colored chalk used for drawing. Pastels create soft, delicate colors that can be blended easily." },
-                { word: "WATERCOLOR", hints: ["Paint with water", "Transparent colors"], meaning: "Paint that uses water as a thinner. Watercolors create transparent, flowing colors perfect for light subjects." },
-                { word: "ACRYLIC", hints: ["Fast-drying paint", "Plastic-based"], meaning: "A type of fast-drying paint made from plastic. Acrylic paint can be used thick or thin and dries quickly." },
-                { word: "OIL", hints: ["Slow-drying paint", "Rich colors"], meaning: "Paint made with oil that dries slowly. Oil paints create rich colors and allow artists to blend for a long time." },
-                { word: "INK", hints: ["Liquid for writing", "Also for drawing"], meaning: "A colored liquid used for writing, drawing, or printing. Ink can be applied with pens, brushes, or stamps." },
-                { word: "MARKER", hints: ["Has ink inside", "Makes bold lines"], meaning: "A pen with a thick tip that contains ink. Markers make bold, colorful lines and are great for drawing and coloring." },
-                { word: "CHALK", hints: ["For chalkboards", "Also for drawing"], meaning: "A soft, white or colored stick used for writing on chalkboards or drawing on sidewalks." },
-                { word: "CHARCOAL", hints: ["Black drawing stick", "Makes dark lines"], meaning: "A black drawing stick made from burned wood. Charcoal creates dark, rich lines that can be smudged for shading." },
-                { word: "SKETCHBOOK", hints: ["Book for drawing", "Has blank pages"], meaning: "A book with blank pages for drawing and sketching. Artists use sketchbooks to practice and develop ideas." },
-                { word: "GALLERY", hints: ["Shows artwork", "People visit"], meaning: "A place where artwork is displayed for people to see. Galleries and museums help people appreciate art." },
-                { word: "MUSEUM", hints: ["Shows art/history", "Educational place"], meaning: "A building that displays objects of artistic, cultural, or scientific importance. Museums help people learn and appreciate history and art." },
-                { word: "FRAME", hints: ["Around picture", "Protects art"], meaning: "A border that goes around a picture or painting. Frames protect artwork and make it look finished when displayed." },
-                { word: "MAT", hints: ["Cardboard border", "Inside frame"], meaning: "A cardboard border placed between a picture and its frame. Mats protect artwork and create space between the art and glass." },
-                { word: "PERFORM", hints: ["Entertain audience", "On stage"], meaning: "To present music, theater, or dance to an audience. Performers practice hard to give good performances." },
-                { word: "AUDIENCE", hints: ["People watching", "At performance"], meaning: "The people who watch and listen to a performance. Audiences clap to show they enjoyed the performance." },
-                { word: "COSTUME", hints: ["Special clothing", "For performance"], meaning: "Special clothing worn by performers. Costumes help actors look like their characters in plays and movies." },
-                { word: "PROP", hints: ["Object in play", "Used by actors"], meaning: "An object used by actors during a performance. Props can include things like books, phones, or furniture on stage." },
-                { word: "SCRIPT", hints: ["Written play", "Words for actors"], meaning: "The written text of a play, movie, or show. Scripts tell actors what to say and do during performances." },
-                { word: "REHEARSE", hints: ["Practice performance", "Before show"], meaning: "To practice a performance before presenting it to an audience. Rehearsals help performers do their best." },
-                { word: "EXHIBIT", hints: ["Display of art", "In museum/gallery"], meaning: "A public display of artwork or objects. Exhibits in museums and galleries help people learn and appreciate art." },
-                { word: "CRAFT", hints: ["Handmade object", "Creative activity"], meaning: "An activity involving skill in making things by hand. Crafts include knitting, pottery, woodworking, and many other creative activities." },
-                { word: "WEAVE", hints: ["Make fabric", "Cross threads"], meaning: "To make fabric by crossing threads over and under each other. Weaving creates cloth for clothing, blankets, and tapestries." },
-                { word: "KNIT", hints: ["Make with yarn", "Uses needles"], meaning: "To make fabric by looping yarn together with needles. Knitting creates clothing like sweaters, scarves, and hats." },
-                { word: "SEW", hints: ["Join fabric", "With needle/thread"], meaning: "To join pieces of fabric together using a needle and thread. Sewing creates clothing, quilts, and other textile items." },
-                { word: "QUILT", hints: ["Warm blanket", "Sewn layers"], meaning: "A warm bed covering made by sewing together layers of fabric. Quilts often have decorative patterns sewn on top." },
-                { word: "ORIGAMI", hints: ["Paper folding", "Japanese art"], meaning: "The Japanese art of folding paper into decorative shapes. Origami creates animals, flowers, and other objects without cutting or gluing." },
-                { word: "PUPPET", hints: ["Movable doll", "For shows"], meaning: "A doll or figure that can be moved to tell stories. Puppets are used in puppet shows for entertainment." },
-                { word: "MASKS", hints: ["Covers face", "For theater or parties"], meaning: "A covering for all or part of the face. Masks are worn for protection, disguise, entertainment, or ritual purposes." },
-                { word: "JEWELRY", hints: ["Worn for decoration", "Necklaces, rings"], meaning: "Decorative items worn for personal adornment. Jewelry includes necklaces, bracelets, rings, and earrings." },
-                { word: "BEAD", hints: ["Small decorative object", "For jewelry"], meaning: "A small decorative object with a hole for threading. Beads are used to make jewelry and decorative items." },
-                { word: "PHOTO", hints: ["Picture from camera", "Captures moment"], meaning: "Short for photograph - an image created by a camera. Photos capture special moments and memories." }
+                { word: "PAINT", hints: ["Comes in many colors", "Use a brush with it"], meaning: "A colored liquid used to create pictures." },
+                { word: "COLOR", hints: ["Red, blue, yellow", "Makes things bright"], meaning: "What we see when light reflects off objects." },
+                { word: "BRUSH", hints: ["Has bristles", "Used with paint"], meaning: "A tool with bristles used to apply paint." },
+                { word: "DRAW", hints: ["Make a picture", "Use pencil or crayon"], meaning: "To create a picture using lines and shapes." },
+                { word: "CLAY", hints: ["Moldable material", "Used to make sculptures"], meaning: "A soft, moldable material that hardens when baked." },
+                { word: "MUSIC", hints: ["Made with instruments", "Has rhythm and melody"], meaning: "Sounds arranged in a pleasing way." },
+                { word: "DANCE", hints: ["Move to music", "Uses your body"], meaning: "Moving your body to music in a rhythmic way." },
+                { word: "ACT", hints: ["Pretend to be someone else", "Done in plays"], meaning: "To perform a role in a play, movie, or show." },
+                { word: "STAGE", hints: ["Where performances happen", "Raised platform"], meaning: "A raised platform where performers entertain." },
+                { word: "SONG", hints: ["Music with words", "You sing it"], meaning: "A musical composition with words that are sung." },
+                { word: "CANVAS", hints: ["Paint on it", "Stretched fabric"], meaning: "A strong cloth used as a surface for painting." },
+                { word: "EASEL", hints: ["Holds canvas", "Artist uses it"], meaning: "A stand for holding an artist's canvas." },
+                { word: "PALETTE", hints: ["Mixes colors", "Artist holds it"], meaning: "A board on which artists mix colors." },
+                { word: "SCULPTURE", hints: ["3D art", "Made from clay or stone"], meaning: "Three-dimensional artwork." },
+                { word: "POTTERY", hints: ["Made from clay", "Bowls and cups"], meaning: "Objects made from clay and hardened by heat." },
+                { word: "SKETCH", hints: ["Quick drawing", "Preliminary artwork"], meaning: "A quick, rough drawing." },
+                { word: "PORTRAIT", hints: ["Picture of person", "Shows face"], meaning: "A painting, drawing, or photograph of a person." },
+                { word: "LANDSCAPE", hints: ["Picture of scenery", "Shows nature"], meaning: "A work of art showing natural scenery." },
+                { word: "STILLLIFE", hints: ["Picture of objects", "Fruit or flowers"], meaning: "A painting of inanimate objects." },
+                { word: "ABSTRACT", hints: ["Not realistic", "Uses shapes and colors"], meaning: "Art that does not attempt to represent reality." },
+                { word: "REALISM", hints: ["Looks real", "True to life"], meaning: "Art that represents subjects accurately." },
+                { word: "WATERCOLOR", hints: ["Paint with water", "Transparent colors"], meaning: "Paint that uses water as a solvent." },
+                { word: "OILPAINT", hints: ["Thick paint", "Dries slowly"], meaning: "Paint made with oil as a binder." },
+                { word: "ACRYLIC", hints: ["Fast-drying paint", "Water soluble"], meaning: "Paint made from acrylic resin." },
+                { word: "PASTEL", hints: ["Colored chalk", "Soft colors"], meaning: "Art medium in the form of a stick." },
+                { word: "CHARCOAL", hints: ["Black drawing material", "Made from burnt wood"], meaning: "A black drawing material made from burnt wood." },
+                { word: "INK", hints: ["Liquid for writing", "Used in pens"], meaning: "A colored liquid used for writing or printing." },
+                { word: "PEN", hints: ["Writes with ink", "Has nib"], meaning: "A tool used for writing with ink." },
+                { word: "PENCIL", hints: ["Writes with graphite", "Has eraser"], meaning: "A writing tool with a graphite core." },
+                { word: "CRAYON", hints: ["Colored wax", "Children use it"], meaning: "A stick of colored wax used for drawing." },
+                { word: "MARKER", hints: ["Permanent ink", "Writes on many surfaces"], meaning: "A pen with a felt tip." },
+                { word: "CHALK", hints: ["Writes on board", "Dusty"], meaning: "A soft white limestone used for writing." },
+                { word: "GOUACHE", hints: ["Opaque watercolor", "Matte finish"], meaning: "A type of watercolor paint." },
+                { word: "FRESCO", hints: ["Wall painting", "On wet plaster"], meaning: "A technique of mural painting on wet plaster." },
+                { word: "MOSAIC", hints: ["Picture from tiles", "Small pieces"], meaning: "Art made from small pieces of colored materials." },
+                { word: "COLLAGE", hints: ["Art from pieces", "Glued together"], meaning: "Art made by assembling different materials." },
+                { word: "PRINT", hints: ["Multiple copies", "From block or plate"], meaning: "Art made by printing, usually on paper." },
+                { word: "LITHOGRAPH", hints: ["Print from stone", "Flat surface"], meaning: "A printing process using a flat stone or plate." },
+                { word: "ETCHING", hints: ["Print from metal", "Acid used"], meaning: "A printmaking technique using acid." },
+                { word: "WOODCUT", hints: ["Print from wood", "Carved block"], meaning: "A relief printing technique using wood." },
+                { word: "SERIGRAPH", hints: ["Silk screen print", "Uses stencil"], meaning: "A printmaking technique using a stencil." },
+                { word: "INSTALLATION", hints: ["Large art piece", "Fills space"], meaning: "Large-scale, mixed-media artworks." },
+                { word: "PERFORMANCE", hints: ["Live art", "Artist performs"], meaning: "Art in which the artist uses their body." },
+                { word: "PHOTOGRAPHY", hints: ["Takes pictures", "Uses camera"], meaning: "The art of creating images using light." },
+                { word: "FILM", hints: ["Moving pictures", "Tells story"], meaning: "A series of moving images shown on screen." },
+                { word: "ANIMATION", hints: ["Moving drawings", "Cartoons"], meaning: "The technique of photographing drawings to create movement." },
+                { word: "CARTOON", hints: ["Funny drawing", "Animated show"], meaning: "A humorous drawing or animated film." },
+                { word: "COMIC", hints: ["Picture story", "In panels"], meaning: "A sequence of drawings telling a story." },
+                { word: "GRAFFITI", hints: ["Street art", "Spray paint"], meaning: "Writing or drawings on public surfaces." },
+                { word: "CALLIGRAPHY", hints: ["Beautiful writing", "Artistic lettering"], meaning: "The art of beautiful handwriting." }
             ],
             actions: [
-                { word: "JUMP", hints: ["Go up in the air", "Use your legs"], meaning: "To push yourself off the ground using your legs. Jumping is a way to move over things or just have fun." },
-                { word: "RUN", hints: ["Move fast", "Faster than walking"], meaning: "To move quickly on foot. Running is faster than walking and is good exercise for your body." },
-                { word: "READ", hints: ["Look at words", "Understand a book"], meaning: "To look at written words and understand what they mean. Reading helps us learn new things and enjoy stories." },
-                { word: "WRITE", hints: ["Put words on paper", "Use a pen or pencil"], meaning: "To form letters and words on paper or screen. Writing lets us share our thoughts and stories with others." },
-                { word: "SING", hints: ["Make musical sounds", "Use your voice"], meaning: "To make musical sounds with your voice. People sing songs when they're happy, at concerts, or just for fun." },
-                { word: "LAUGH", hints: ["Sound of happiness", "You do it when something is funny"], meaning: "To make sounds with your voice when something is funny or makes you happy. Laughing is good for your health and makes you feel better." },
-                { word: "THINK", hints: ["Use your brain", "Have ideas"], meaning: "To use your mind to consider ideas, make decisions, or solve problems. Thinking helps us understand the world around us." },
-                { word: "BUILD", hints: ["Make something", "Use blocks or tools"], meaning: "To create something by putting parts together. People build with blocks, Legos, wood, or other materials." },
-                { word: "HELP", hints: ["Assist someone", "Make things easier"], meaning: "To make something easier for someone or give them what they need. Helping others is a kind thing to do." },
-                { word: "LEARN", hints: ["Gain knowledge", "Find out new things"], meaning: "To gain knowledge or skill by studying, practicing, or being taught. Learning happens every day throughout our lives." },
-                { word: "SWIM", hints: ["Move in water", "Use arms and legs"], meaning: "To move through water by moving your arms and legs. Swimming is fun exercise and an important safety skill." },
-                { word: "DANCE", hints: ["Move to music", "Rhythmic movement"], meaning: "To move your body rhythmically to music. Dancing can express feelings and is fun at parties." },
-                { word: "CLAP", hints: ["Hit hands together", "Show appreciation"], meaning: "To hit your hands together to make a sound. People clap to show they like something or to keep rhythm." },
-                { word: "WALK", hints: ["Move on feet", "One step after another"], meaning: "To move by putting one foot in front of the other. Walking is how people usually get from place to place." },
-                { word: "TALK", hints: ["Use your voice", "Communicate with words"], meaning: "To use your voice to communicate with others. Talking helps people share ideas, feelings, and information." },
-                { word: "LISTEN", hints: ["Pay attention to sounds", "Hear what someone says"], meaning: "To pay attention to sounds or what someone is saying. Listening carefully helps us understand others." },
-                { word: "EAT", hints: ["Put food in mouth", "Gives energy"], meaning: "To put food in your mouth, chew it, and swallow it. Eating gives your body energy and nutrients to grow and stay healthy." },
-                { word: "DRINK", hints: ["Swallow liquid", "Water is important"], meaning: "To swallow liquid. Drinking water is especially important because it keeps your body hydrated and healthy." },
-                { word: "SLEEP", hints: ["Close eyes and rest", "At night"], meaning: "To rest with your eyes closed, usually at night. Sleep helps your body recover and grow, and your brain process what you learned." },
-                { word: "WAKE", hints: ["Stop sleeping", "Open eyes"], meaning: "To stop sleeping and become conscious. People usually wake up in the morning after sleeping at night." },
-                { word: "BRUSH", hints: ["Clean teeth/hair", "With bristles"], meaning: "To clean or arrange using a brush. People brush their teeth to keep them healthy and brush their hair to make it neat." },
-                { word: "WASH", hints: ["Clean with water", "Hands or dishes"], meaning: "To clean something using water and often soap. Washing removes dirt and germs from hands, clothes, and dishes." },
-                { word: "COOK", hints: ["Prepare food", "Using heat"], meaning: "To prepare food by heating it. Cooking makes food safe to eat and can make it taste better." },
-                { word: "BAKE", hints: ["Cook in oven", "Breads and cakes"], meaning: "To cook food in an oven using dry heat. Baking is used for bread, cakes, cookies, and other baked goods." },
-                { word: "CLEAN", hints: ["Make tidy", "Remove dirt"], meaning: "To make something free from dirt or mess. Cleaning keeps homes, clothes, and objects looking nice and working well." },
-                { word: "PLAY", hints: ["Have fun", "Games or toys"], meaning: "To engage in activity for enjoyment and recreation. Playing helps children learn, exercise, and develop social skills." },
-                { word: "WORK", hints: ["Do a job", "Earn money"], meaning: "To do activities that require effort, often for payment. Work can include jobs, schoolwork, or household chores." },
-                { word: "STUDY", hints: ["Learn seriously", "For school"], meaning: "To devote time and attention to learning about a subject. Studying helps people understand and remember information." },
-                { word: "PAINT", hints: ["Apply color", "To paper or wall"], meaning: "To apply paint to a surface. Painting can create artwork or change the color of walls and objects." },
-                { word: "DRAW", hints: ["Make picture", "With pencil"], meaning: "To create a picture using lines and shapes. Drawing is a fun way to express creativity and imagination." },
-                { word: "COLOR", hints: ["Add color to", "In coloring book"], meaning: "To add color to something, like a picture in a coloring book. Coloring helps develop fine motor skills and creativity." },
-                { word: "CUT", hints: ["Divide with scissors", "Paper or food"], meaning: "To divide or separate something using a sharp tool. People cut paper with scissors and food with knives." },
-                { word: "GLUE", hints: ["Stick together", "With adhesive"], meaning: "To join things together using an adhesive substance. Glue helps attach paper, wood, and other materials." },
-                { word: "FOLD", hints: ["Bend over", "Paper or clothes"], meaning: "To bend something over onto itself. People fold paper for crafts and fold clothes to put them away neatly." },
-                { word: "CARRY", hints: ["Hold and transport", "Take something"], meaning: "To hold something while moving from one place to another. Carrying lets people transport objects they need." },
-                { word: "LIFT", hints: ["Raise up", "Pick something up"], meaning: "To raise something to a higher position. Lifting requires strength to pick up heavy objects." },
-                { word: "PUSH", hints: ["Apply force away", "Move something"], meaning: "To apply force to move something away from you. Pushing opens doors, moves furniture, and propels swings." },
-                { word: "PULL", hints: ["Apply force toward", "Bring something closer"], meaning: "To apply force to move something toward you. Pulling opens drawers, brings toys closer, and operates many tools." },
-                { word: "THROW", hints: ["Propel through air", "Ball or object"], meaning: "To propel something through the air using your arm. Throwing is used in sports and games like catch and basketball." },
-                { word: "CATCH", hints: ["Grab moving object", "In air"], meaning: "To grab and hold a moving object. Catching is important in sports and games and requires good timing and coordination." },
-                { word: "KICK", hints: ["Hit with foot", "Ball"], meaning: "To strike something with your foot. Kicking is used in sports like soccer and football to move a ball." },
-                { word: "BOUNCE", hints: ["Spring back", "Ball on ground"], meaning: "To spring back after hitting a surface. Balls bounce when dropped, and people can bounce on trampolines." },
-                { word: "ROLL", hints: ["Turn over and over", "Like a ball"], meaning: "To turn over and over on a surface. Balls roll, and people can roll down hills for fun." },
-                { word: "SLIDE", hints: ["Move smoothly", "Down a surface"], meaning: "To move smoothly along a surface. Children slide down slides at playgrounds, and objects slide on slippery surfaces." },
-                { word: "SWING", hints: ["Move back and forth", "On playground"], meaning: "To move back and forth while hanging from something. Swinging is fun on playground swings and hammocks." },
-                { word: "CLIMB", hints: ["Go upward", "Tree or ladder"], meaning: "To move upward using your hands and feet. People climb trees, ladders, mountains, and playground equipment." },
-                { word: "CRAWL", hints: ["Move on hands/knees", "Babies do this"], meaning: "To move on your hands and knees. Babies crawl before they learn to walk, and adults might crawl through small spaces." },
-                { word: "HOP", hints: ["Jump on one foot", "Like a bunny"], meaning: "To jump on one foot or to make small jumps. People hop in games, and animals like bunnies and kangaroos hop to move." },
-                { word: "SKIP", hints: ["Light jumping step", "Happy movement"], meaning: "To move with light jumping steps, often showing happiness. Children often skip when they're excited or playing." },
-                { word: "MARCH", hints: ["Walk like soldier", "Rhythmic steps"], meaning: "To walk with regular, measured steps like a soldier. Marching is done in parades and by military personnel." },
-                { word: "STRETCH", hints: ["Extend body", "Before exercise"], meaning: "To extend your body or limbs to full length. Stretching helps prepare muscles for exercise and feels good after sitting." },
-                { word: "BEND", hints: ["Fold body", "At waist or knees"], meaning: "To fold your body at a joint. People bend to pick things up, tie shoes, or do exercises." },
-                { word: "TWIST", hints: ["Turn around", "Rotate body"], meaning: "To turn something around a central point. People twist to look behind them or when doing certain dances and exercises." },
-                { word: "SHAKE", hints: ["Move quickly back/forth", "Like a dance"], meaning: "To move quickly back and forth or up and down. People shake hands when meeting, shake objects to mix them, or shake when dancing." },
-                { word: "HUG", hints: ["Hold close", "Show affection"], meaning: "To hold someone close in your arms. Hugging shows affection, comfort, or greeting to family and friends." },
-                { word: "KISS", hints: ["Touch with lips", "Show love"], meaning: "To touch someone or something with your lips. Kissing shows affection, love, or greeting in many cultures." },
-                { word: "SMILE", hints: ["Turn up mouth corners", "Show happiness"], meaning: "To turn up the corners of your mouth, showing happiness or pleasure. Smiling makes people feel good and is a friendly gesture." },
-                { word: "CRY", hints: ["Shed tears", "When sad or happy"], meaning: "To shed tears from your eyes, usually when feeling strong emotions. People cry when sad, but sometimes also when very happy or touched." },
-                { word: "YAWN", hints: ["Open mouth wide", "When tired"], meaning: "To open your mouth wide and take a deep breath, usually when tired or bored. Yawning helps bring more oxygen to your body." },
-                { word: "SNEEZE", hints: ["Forceful air through nose", "When nose tickles"], meaning: "To forcefully expel air through your nose and mouth, usually when your nose is irritated. Sneezing helps clear your nasal passages." },
-                { word: "COUGH", hints: ["Clear throat", "Forceful air"], meaning: "To forcefully expel air from your lungs through your mouth, usually to clear your throat. Coughing helps remove irritants from your airways." },
-                { word: "WHISPER", hints: ["Speak very softly", "Quiet voice"], meaning: "To speak very softly using little breath. Whispering lets you talk without others hearing, perfect for secrets." },
-                { word: "SHOUT", hints: ["Speak loudly", "Get attention"], meaning: "To speak very loudly. People shout to get attention from far away or to express strong emotions like excitement or anger." },
-                { word: "WHISTLE", hints: ["Make high sound", "With lips"], meaning: "To make a high-pitched sound by forcing air through your lips or a small opening. People whistle tunes, call dogs, or show they're happy." },
-                { word: "HUMM", hints: ["Sing with closed mouth", "Make musical sound"], meaning: "To sing with your lips closed. Humming lets you make music without words and can be calming or help you remember a tune." }
+                { word: "JUMP", hints: ["Go up in the air", "Use your legs"], meaning: "To push yourself off the ground using your legs." },
+                { word: "RUN", hints: ["Move fast", "Faster than walking"], meaning: "To move quickly on foot." },
+                { word: "READ", hints: ["Look at words", "Understand a book"], meaning: "To look at written words and understand them." },
+                { word: "WRITE", hints: ["Put words on paper", "Use a pen or pencil"], meaning: "To form letters and words on paper or screen." },
+                { word: "SING", hints: ["Make musical sounds", "Use your voice"], meaning: "To make musical sounds with your voice." },
+                { word: "LAUGH", hints: ["Sound of happiness", "You do it when something is funny"], meaning: "To make sounds when something is funny." },
+                { word: "THINK", hints: ["Use your brain", "Have ideas"], meaning: "To use your mind to consider ideas." },
+                { word: "BUILD", hints: ["Make something", "Use blocks or tools"], meaning: "To create something by putting parts together." },
+                { word: "HELP", hints: ["Assist someone", "Make things easier"], meaning: "To make something easier for someone." },
+                { word: "LEARN", hints: ["Gain knowledge", "Find out new things"], meaning: "To gain knowledge or skill." },
+                { word: "TEACH", hints: ["Share knowledge", "Instruct others"], meaning: "To help someone learn something." },
+                { word: "PLAY", hints: ["Have fun", "Games or toys"], meaning: "To engage in activity for enjoyment." },
+                { word: "WORK", hints: ["Do a job", "Earn money"], meaning: "To do a job or task." },
+                { word: "SLEEP", hints: ["Rest at night", "Close your eyes"], meaning: "To rest with your eyes closed." },
+                { word: "EAT", hints: ["Consume food", "With mouth"], meaning: "To put food in your mouth and swallow it." },
+                { word: "DRINK", hints: ["Consume liquid", "Swallow water"], meaning: "To take liquid into your mouth and swallow it." },
+                { word: "COOK", hints: ["Prepare food", "Use heat"], meaning: "To prepare food by heating it." },
+                { word: "BAKE", hints: ["Cook in oven", "Make bread or cake"], meaning: "To cook food in an oven." },
+                { word: "WALK", hints: ["Move on foot", "Slower than run"], meaning: "To move at a regular pace by lifting and setting down feet." },
+                { word: "SWIM", hints: ["Move in water", "Use arms and legs"], meaning: "To move through water using your body." },
+                { word: "DIVE", hints: ["Jump into water", "Head first"], meaning: "To jump into water headfirst." },
+                { word: "CLIMB", hints: ["Go up", "Mountain or tree"], meaning: "To go upward using hands and feet." },
+                { word: "CRAWL", hints: ["Move on hands and knees", "Babies do this"], meaning: "To move on hands and knees." },
+                { word: "ROLL", hints: ["Turn over and over", "Like a ball"], meaning: "To move by turning over and over." },
+                { word: "SLIDE", hints: ["Move smoothly", "Down a slope"], meaning: "To move smoothly along a surface." },
+                { word: "SWING", hints: ["Move back and forth", "On a playground"], meaning: "To move back and forth suspended from above." },
+                { word: "THROW", hints: ["Send through air", "Use arm"], meaning: "To propel something through the air." },
+                { word: "CATCH", hints: ["Grab in air", "Stop from falling"], meaning: "To seize something in the air." },
+                { word: "KICK", hints: ["Hit with foot", "Soccer move"], meaning: "To strike with the foot." },
+                { word: "HIT", hints: ["Strike something", "Make contact"], meaning: "To come into contact with forcefully." },
+                { word: "PUSH", hints: ["Move away", "Apply force"], meaning: "To exert force on something to move it away." },
+                { word: "PULL", hints: ["Move toward", "Tug on"], meaning: "To exert force on something to move it toward you." },
+                { word: "LIFT", hints: ["Raise up", "Pick up"], meaning: "To raise something to a higher position." },
+                { word: "CARRY", hints: ["Transport", "Hold and move"], meaning: "To support and move someone or something." },
+                { word: "HOLD", hints: ["Keep in hand", "Grasp"], meaning: "To have and keep in one's hand." },
+                { word: "DROP", hints: ["Let fall", "Release"], meaning: "To let something fall." },
+                { word: "TIE", hints: ["Bind together", "Make knot"], meaning: "To fasten with a knot." },
+                { word: "UNTIE", hints: ["Undo knot", "Loosen"], meaning: "To undo a knot." },
+                { word: "FOLD", hints: ["Bend over", "Make crease"], meaning: "To bend something over on itself." },
+                { word: "CUT", hints: ["Divide with blade", "Use scissors"], meaning: "To divide with a sharp instrument." },
+                { word: "PASTE", hints: ["Stick together", "Use glue"], meaning: "To join things together with adhesive." },
+                { word: "COLOR", hints: ["Add hue", "Use crayons"], meaning: "To add color to something." },
+                { word: "DRAW", hints: ["Make picture", "Use pencil"], meaning: "To produce a picture with lines." },
+                { word: "PAINT", hints: ["Apply color", "Use brush"], meaning: "To apply paint to a surface." },
+                { word: "DANCE", hints: ["Move to music", "Rhythmic movement"], meaning: "To move rhythmically to music." },
+                { word: "SING", hints: ["Make melody", "Use voice"], meaning: "To produce musical sounds with the voice." },
+                { word: "SHOUT", hints: ["Speak loudly", "Yell"], meaning: "To speak very loudly." },
+                { word: "WHISPER", hints: ["Speak softly", "Quiet voice"], meaning: "To speak very softly." },
+                { word: "LISTEN", hints: ["Pay attention", "Hear sounds"], meaning: "To give attention with the ear." },
+                { word: "WATCH", hints: ["Look at", "Observe"], meaning: "To look at attentively." }
             ]
         };
         
@@ -850,6 +877,7 @@
         let letterTileElements = [];
         let letterBoxElements = [];
         let usedWords = [];
+        let gameActive = true;
         
         // DOM elements
         const wordContainer = document.getElementById('wordContainer');
@@ -875,6 +903,7 @@
             currentQuestionIndex = 0;
             score = 0;
             usedWords = [];
+            gameActive = true;
             updateScore();
             loadQuestion();
             
@@ -911,6 +940,8 @@
             nextBtn.style.display = 'none';
             definitionContainer.style.display = 'none';
             answerFeedback.style.display = 'none';
+            
+            gameActive = true;
         }
         
         // Get a random word from the word bank
@@ -938,25 +969,27 @@
             wordContainer.innerHTML = '';
             letterBoxElements = [];
             
+            const innerContainer = document.createElement('div');
+            innerContainer.className = 'word-container-inner';
+            
             for (let i = 0; i < currentWord.length; i++) {
                 const box = document.createElement('div');
                 box.className = 'letter-box empty';
                 box.dataset.index = i;
                 box.dataset.expected = currentWord[i];
                 box.dataset.id = `box-${i}`;
+                box.dataset.letter = '';
                 
-                // Make empty boxes draggable (to accept letters)
-                box.addEventListener('dragover', handleDragOver);
-                box.addEventListener('drop', handleDrop);
-                box.addEventListener('dragstart', handleDragStartFromBox);
-                box.addEventListener('dragend', handleDragEnd);
-                
-                // Make empty boxes draggable
-                box.draggable = true;
+                box.addEventListener('click', handleBoxClick);
                 
                 letterBoxElements.push(box);
-                wordContainer.appendChild(box);
+                innerContainer.appendChild(box);
             }
+            
+            wordContainer.appendChild(innerContainer);
+            wordContainer.style.flexWrap = 'nowrap';
+            wordContainer.style.overflowX = 'auto';
+            wordContainer.style.justifyContent = 'center';
         }
         
         // Create scrambled letter tiles (8 letters total)
@@ -987,150 +1020,74 @@
                 const tile = document.createElement('div');
                 tile.className = 'letter-tile';
                 tile.textContent = letter;
-                tile.draggable = true;
                 tile.dataset.id = `tile-${index}`;
                 tile.dataset.letter = letter;
-                tile.dataset.source = 'tile';
+                tile.dataset.used = 'false';
                 
-                // Add drag event listeners
-                tile.addEventListener('dragstart', handleDragStart);
-                tile.addEventListener('dragend', handleDragEnd);
+                tile.addEventListener('click', handleTileClick);
                 
                 letterTileElements.push(tile);
                 lettersContainer.appendChild(tile);
             });
+        }
+        
+        // Handle click on letter tile
+        function handleTileClick(e) {
+            if (!gameActive) return;
             
-            // Make letters container a drop zone
-            lettersContainer.addEventListener('dragover', handleDragOver);
-            lettersContainer.addEventListener('drop', handleDropToContainer);
-        }
-        
-        // Handle drag start from letter tiles
-        function handleDragStart(e) {
-            e.dataTransfer.setData('text/plain', e.target.textContent);
-            e.dataTransfer.setData('source', 'tile');
-            e.dataTransfer.setData('id', e.target.dataset.id);
-            e.target.classList.add('dragging');
-        }
-        
-        // Handle drag start from letter boxes (when moving letters back)
-        function handleDragStartFromBox(e) {
-            if (e.target.classList.contains('empty')) {
-                e.preventDefault(); // Don't drag empty boxes
-                return;
-            }
+            const tile = e.target;
+            const letter = tile.dataset.letter;
             
-            e.dataTransfer.setData('text/plain', e.target.textContent);
-            e.dataTransfer.setData('source', 'box');
-            e.dataTransfer.setData('id', e.target.dataset.id);
-            e.target.classList.add('dragging');
-        }
-        
-        // Handle drag end
-        function handleDragEnd(e) {
-            e.target.classList.remove('dragging');
-        }
-        
-        // Handle drag over (allow drop)
-        function handleDragOver(e) {
-            e.preventDefault();
-        }
-        
-        // Handle drop to letter boxes
-        function handleDrop(e) {
-            e.preventDefault();
+            // Find the first empty box
+            const emptyBox = Array.from(letterBoxElements).find(box => 
+                box.classList.contains('empty')
+            );
             
-            const letter = e.dataTransfer.getData('text/plain');
-            const source = e.dataTransfer.getData('source');
-            const sourceId = e.dataTransfer.getData('id');
-            
-            // If this box already has a letter, swap them
-            if (e.target.textContent && !e.target.classList.contains('empty')) {
-                // Get the letter currently in this box
-                const currentLetter = e.target.textContent;
+            if (emptyBox) {
+                emptyBox.textContent = letter;
+                emptyBox.dataset.letter = letter;
+                emptyBox.classList.remove('empty');
                 
-                // If dragging from a box back to boxes (rearranging)
-                if (source === 'box') {
-                    const sourceBox = document.querySelector(`[data-id="${sourceId}"]`);
-                    sourceBox.textContent = currentLetter;
-                    sourceBox.classList.remove('empty');
-                } 
-                // If dragging from tile to a filled box
-                else if (source === 'tile') {
-                    const sourceTile = document.querySelector(`[data-id="${sourceId}"]`);
-                    sourceTile.textContent = currentLetter;
-                    sourceTile.classList.remove('used');
-                    sourceTile.classList.add('letter-tile');
-                }
-                
-                // Put the new letter in the target box
-                e.target.textContent = letter;
-                e.target.classList.remove('empty');
-            } 
-            // If this box is empty
-            else {
-                // Put the letter in the empty box
-                e.target.textContent = letter;
-                e.target.classList.remove('empty');
-                
-                // If dragging from a tile, mark it as used
-                if (source === 'tile') {
-                    const sourceTile = document.querySelector(`[data-id="${sourceId}"]`);
-                    sourceTile.classList.add('used');
-                }
-                // If dragging from another box, clear that box
-                else if (source === 'box') {
-                    const sourceBox = document.querySelector(`[data-id="${sourceId}"]`);
-                    sourceBox.textContent = '';
-                    sourceBox.classList.add('empty');
-                }
+                tile.classList.add('used');
+                tile.dataset.used = 'true';
             }
         }
         
-        // Handle drop to letters container (returning letters)
-        function handleDropToContainer(e) {
-            e.preventDefault();
+        // Handle click on letter box
+        function handleBoxClick(e) {
+            if (!gameActive) return;
             
-            const letter = e.dataTransfer.getData('text/plain');
-            const source = e.dataTransfer.getData('source');
-            const sourceId = e.dataTransfer.getData('id');
+            const box = e.target;
+            if (box.classList.contains('empty')) return;
             
-            // If dragging from a box back to the container
-            if (source === 'box') {
-                const sourceBox = document.querySelector(`[data-id="${sourceId}"]`);
+            const letter = box.dataset.letter;
+            const usedTile = Array.from(letterTileElements).find(tile => 
+                tile.dataset.letter === letter && tile.dataset.used === 'true'
+            );
+            
+            if (usedTile) {
+                usedTile.classList.remove('used');
+                usedTile.dataset.used = 'false';
                 
-                // Clear the source box
-                sourceBox.textContent = '';
-                sourceBox.classList.add('empty');
-                
-                // Find an available tile with this letter (or create one)
-                let foundTile = null;
-                for (let tile of letterTileElements) {
-                    if (tile.textContent === letter && tile.classList.contains('used')) {
-                        foundTile = tile;
-                        break;
-                    }
-                }
-                
-                // If found a used tile with this letter, make it available
-                if (foundTile) {
-                    foundTile.classList.remove('used');
-                }
+                box.textContent = '';
+                box.dataset.letter = '';
+                box.classList.add('empty');
             }
         }
         
         // Check if the spelling is correct
         function checkSpelling() {
+            if (!gameActive) return;
+            
+            gameActive = false;
             const wordBoxes = document.querySelectorAll('.letter-box:not(.empty)');
             let isCorrect = true;
             let correctLettersCount = 0;
             
-            // First, remove any previous correct/incorrect styling
             wordBoxes.forEach(box => {
                 box.classList.remove('correct', 'incorrect');
             });
             
-            // Check each box
             wordBoxes.forEach(box => {
                 const expectedLetter = box.dataset.expected;
                 const actualLetter = box.textContent;
@@ -1144,87 +1101,42 @@
                 }
             });
             
-            // Show the definition container
             definitionContainer.style.display = 'block';
             
             if (isCorrect && wordBoxes.length === currentWord.length) {
-                // Correct spelling
                 score++;
                 updateScore();
                 showSuccessAnimation();
-                
-                // Show next button
                 checkBtn.style.display = 'none';
                 nextBtn.style.display = 'block';
-                
-                // Hide answer feedback if shown
                 answerFeedback.style.display = 'none';
-                
-                // Disable further dragging after correct answer
-                disableDragging();
             } else {
-                // Incorrect spelling
                 showCorrectAnswer();
-                
-                // Show next button so player can continue
                 checkBtn.style.display = 'none';
                 nextBtn.style.display = 'block';
-                
-                // Disable further dragging after showing answer
-                disableDragging();
             }
         }
         
         // Show the correct answer
         function showCorrectAnswer() {
-            // Show answer feedback
             answerFeedback.style.display = 'block';
             correctAnswerElement.textContent = currentWord;
             
-            // Show the correct letters in the boxes
             const boxes = document.querySelectorAll('.letter-box');
             boxes.forEach((box, index) => {
                 if (index < currentWord.length) {
                     const expectedLetter = currentWord[index];
                     box.textContent = expectedLetter;
+                    box.dataset.letter = expectedLetter;
                     box.classList.add('show-answer');
                     box.classList.remove('empty', 'correct', 'incorrect');
                 }
             });
             
-            // Make all letter tiles invisible since answer is shown
             const tiles = document.querySelectorAll('.letter-tile');
             tiles.forEach(tile => {
                 tile.style.visibility = 'hidden';
             });
-        }
-        
-        // Disable dragging after answer is checked
-        function disableDragging() {
-            // Disable dragging on all tiles and boxes
-            const allDraggables = document.querySelectorAll('.letter-tile, .letter-box');
-            allDraggables.forEach(el => {
-                el.draggable = false;
-                el.style.cursor = 'default';
-            });
-            
-            // Remove event listeners
-            const boxes = document.querySelectorAll('.letter-box');
-            boxes.forEach(box => {
-                box.removeEventListener('dragover', handleDragOver);
-                box.removeEventListener('drop', handleDrop);
-                box.removeEventListener('dragstart', handleDragStartFromBox);
-                box.removeEventListener('dragend', handleDragEnd);
-            });
-            
-            const tiles = document.querySelectorAll('.letter-tile');
-            tiles.forEach(tile => {
-                tile.removeEventListener('dragstart', handleDragStart);
-                tile.removeEventListener('dragend', handleDragEnd);
-            });
-            
-            lettersContainer.removeEventListener('dragover', handleDragOver);
-            lettersContainer.removeEventListener('drop', handleDropToContainer);
         }
         
         // Show success animation
@@ -1232,7 +1144,6 @@
             successAnimation.style.display = 'flex';
             createConfetti();
             
-            // Hide animation after 1.5 seconds
             setTimeout(() => {
                 successAnimation.style.display = 'none';
             }, 1500);
@@ -1242,18 +1153,17 @@
         function createConfetti() {
             const colors = ['#ff3366', '#33cc33', '#3366cc', '#ffcc00', '#9966ff'];
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 30; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.left = `${Math.random() * 100}%`;
                 confetti.style.animationDelay = `${Math.random() * 2}s`;
-                confetti.style.width = `${Math.random() * 15 + 5}px`;
+                confetti.style.width = `${Math.random() * 12 + 4}px`;
                 confetti.style.height = confetti.style.width;
                 
                 successAnimation.appendChild(confetti);
                 
-                // Remove confetti after animation completes
                 setTimeout(() => {
                     confetti.remove();
                 }, 3000);
@@ -1273,11 +1183,9 @@
         
         // End the game
         function endGame() {
-            // Show game over screen
             gameOverElement.style.display = 'block';
             finalScoreElement.textContent = score;
             
-            // Hide game container
             document.querySelector('.game-area').style.display = 'none';
             document.querySelector('.hints-container').style.display = 'none';
             document.querySelector('.definition-container').style.display = 'none';
@@ -1303,14 +1211,20 @@
         checkBtn.addEventListener('click', checkSpelling);
         nextBtn.addEventListener('click', nextQuestion);
         restartBtn.addEventListener('click', () => {
-            // Reset display
             document.querySelector('.game-area').style.display = 'block';
             document.querySelector('.hints-container').style.display = 'block';
             document.querySelector('.definition-container').style.display = 'block';
-            
-            // Restart game
             initGame();
         });
+        
+        // Prevent default touch behaviors
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.classList.contains('letter-tile') || 
+                e.target.classList.contains('letter-box') ||
+                e.target.classList.contains('game-button')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
         
         // Initialize the game when page loads
         window.addEventListener('DOMContentLoaded', initGame);
